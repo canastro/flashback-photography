@@ -1,40 +1,88 @@
+// @flow
 import React from 'react';
+import injectSheet from 'react-jss';
 import {rhythm} from '../utils/typography';
 
-class About extends React.Component {
-    render() {
-        return (
-            <div
-                css={{
-                    padding: rhythm(3 / 4)
-                }}
-            >
-                <h1>About Gatsbygram</h1>
-                <p>
-                    Gatsbygram is an example website built with the JavaScript web framework
-                    {' '}
-                    <a target="_blank" href="https://github.com/gatsbyjs/gatsby">
-                        Gatsby
-                    </a>
-                    .
-                </p>
-                <p>
-                    The code for the site lives at{' '}
-                    <a
-                        href="https://github.com/gatsbyjs/gatsby/tree/master/examples/gatsbygram"
-                        target="_blank"
-                    >
-                        https://github.com/gatsbyjs/gatsby/tree/master/examples/gatsbygram
-                    </a>
-                </p>
-                <p>
-                    <a href="https://www.gatsbyjs.org/blog/gatsbygram-case-study/">
-                        Read a case study on how Gatsbygram was built
-                    </a>
-                </p>
-            </div>
-        );
+const styles = {
+    root: {
+        padding: rhythm(3 / 4)
+    },
+    mySelfWrapper: {
+        display: 'flex'
+    },
+    mySelf: {
+        display: 'flex',
+        alignItems: 'center'
+    },
+    image: {
+        marginRight: 20
     }
-}
+};
 
-export default About;
+type Props = {
+    classes: Object,
+    data: Object
+};
+
+/**
+ * Create about page based on the about content at contentful
+ * @method About
+ * @param  {Object} props - react props
+ * @returns {Node} html page
+ */
+const About = (props: Props) => {
+    const {classes, data} = props;
+    const {mySelf, general, photo} = data.allContentfulAbout.edges[0].node;
+
+    return (
+        <div className={classes.root}>
+            <h1>About Me</h1>
+            <div className={classes.mySelfWrapper}>
+                <img
+                    alt="Post"
+                    key={photo.responsiveResolution.src}
+                    src={photo.responsiveResolution.src}
+                    srcSet={photo.responsiveResolution.srcSet}
+                    className={classes.image}
+                />
+                <div
+                    className={classes.mySelf}
+                    dangerouslySetInnerHTML={{__html: mySelf.childMarkdownRemark.html}}
+                />
+            </div>
+            <div dangerouslySetInnerHTML={{__html: general.childMarkdownRemark.html}} />
+        </div>
+    );
+};
+
+export default injectSheet(styles)(About);
+
+export const pageQuery = graphql`
+    query aboutPage {
+        allContentfulAbout {
+            edges {
+                node {
+                    id
+                    mySelf {
+                        childMarkdownRemark {
+                            html
+                        }
+                    }
+                    general {
+                        childMarkdownRemark {
+                            html
+                        }
+                    }
+                    photo {
+                        responsiveResolution(width: 200) {
+                            width
+                            height
+                            src
+                            srcSet
+                        }
+                    }
+                }
+            }
+        }
+    }
+`;

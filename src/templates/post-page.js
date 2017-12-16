@@ -1,35 +1,33 @@
+// @flow
 import React from 'react';
-import PostDetail from '../components/post-detail';
+import PostDetail from '../components/post/show/show';
 
-class PostTemplate extends React.Component {
-    // static propTypes = {
-    //     data: PropTypes.shape({
-    //         postsJson: PropTypes.object.isRequired
-    //     })
-    // };
+type Props = {
+    data: Object
+};
 
-    render() {
-        return (
-            // PostDetail is used for this detail page and
-            // also in the modal.
-            <PostDetail post={this.props.data.postsJson} />
-        );
-    }
-}
+/**
+ * Post Page
+ * @method TagTemplate
+ * @param  {Object} props - page props
+ * @returns {Node} page
+ */
+const PostPage = (props: Props) => {
+    const {allContentfulPost} = props.data;
 
-export default PostTemplate;
+    return <PostDetail post={allContentfulPost} />;
+};
 
-// The post template's GraphQL query. Notice the “id”
-// variable which is passed in. We set this on the page
-// context in gatsby-node.js.
-//
-// All GraphQL queries in Gatsby are run at build-time and
-// loaded as plain JSON files so have minimal client cost.
+export default PostPage;
+
 export const pageQuery = graphql`
     query PostPage($id: String!) {
-        # Select the post which equals this id.
-        postsJson(id: {eq: $id}) {
-            ...PostDetail_details
+        allContentfulPost(filter: {id: {eq: $id}}) {
+            edges {
+                node {
+                    ...PostDetail_details
+                }
+            }
         }
     }
 `;

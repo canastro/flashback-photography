@@ -11,47 +11,25 @@ const slash = require('slash');
 exports.createPages = ({graphql, boundActionCreators}) => {
     const {createPage} = boundActionCreators;
 
-    return new Promise((resolve, reject) => {
-        // The “graphql” function allows us to run arbitrary
-        // queries against this Gatsbygram's graphql schema. Think of
-        // it like Gatsbygram has a built-in database constructed
-        // from static data that you can run queries against.
-        //
-        // Post is a data node type derived from data/posts.json
-        // which is created when scrapping Instagram. “allPostsJson”
-        // is a "connection" (a GraphQL convention for accessing
-        // a list of nodes) gives us an easy way to query all
-        // Post nodes.
-        resolve(graphql(`
-                    {
-                        allPostsJson(limit: 1000) {
-                            edges {
-                                node {
-                                    id
-                                }
-                            }
+    const buildPostPages = () =>
+        graphql(`
+            {
+                allContentfulPost {
+                    edges {
+                        node {
+                            id
                         }
                     }
-                `).then((result) => {
+                }
+            }
+        `).then((result) => {
             if (result.errors) {
-                reject(new Error(result.errors));
+                throw new Error(result.errors);
             }
 
-            // Create image post pages.
             const postTemplate = path.resolve('src/templates/post-page.js');
-            // We want to create a detailed page for each
-            // Instagram post. Since the scrapped Instagram data
-            // already includes an ID field, we just use that for
-            // each page's path.
-            _.each(result.data.allPostsJson.edges, (edge) => {
-                // Gatsby uses Redux to manage its internal state.
-                // Plugins and sites can use functions like "createPage"
-                // to interact with Gatsby.
+            _.each(result.data.allContentfulPost.edges, (edge) => {
                 createPage({
-                    // Each page is required to have a `path` as well
-                    // as a template component. The `context` is
-                    // optional but is often necessary so the template
-                    // can query data specific to each page.
                     path: `/${slug(edge.node.id)}/`,
                     component: slash(postTemplate),
                     context: {
@@ -59,6 +37,7 @@ exports.createPages = ({graphql, boundActionCreators}) => {
                     }
                 });
             });
-        }));
-    });
+        });
+
+    return Promise.all([buildPostPages()]);
 };
