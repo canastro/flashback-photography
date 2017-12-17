@@ -1,16 +1,28 @@
 // @flow
 import React from 'react';
 import injectSheet from 'react-jss';
+
 import {rhythm} from '../utils/typography';
+import presets from '../utils/presets';
 
 const styles = {
     root: {
         padding: rhythm(3 / 4)
     },
-    mySelfWrapper: {
-        display: 'flex'
+    photographer: {
+        display: 'flex',
+        flexDirection: 'column',
+        marginTop: 20
     },
-    mySelf: {
+    photographerWrapper: {
+        display: 'flex',
+        alignItems: 'center',
+        flexDirection: 'column',
+        [presets.Tablet]: {
+            flexDirection: 'row'
+        }
+    },
+    photographerDescription: {
         display: 'flex',
         alignItems: 'center'
     },
@@ -32,25 +44,36 @@ type Props = {
  */
 const About = (props: Props) => {
     const {classes, data} = props;
-    const {mySelf, general, photo} = data.allContentfulAbout.edges[0].node;
+    const photographers = data.allContentfulPhotographer.edges.map(edge => edge.node);
+    const {general} = data.allContentfulAbout.edges[0].node;
 
     return (
         <div className={classes.root}>
-            <h1>About Me</h1>
-            <div className={classes.mySelfWrapper}>
-                <img
-                    alt="Post"
-                    key={photo.responsiveResolution.src}
-                    src={photo.responsiveResolution.src}
-                    srcSet={photo.responsiveResolution.srcSet}
-                    className={classes.image}
-                />
-                <div
-                    className={classes.mySelf}
-                    dangerouslySetInnerHTML={{__html: mySelf.childMarkdownRemark.html}}
-                />
-            </div>
+            <h1>About Us</h1>
             <div dangerouslySetInnerHTML={{__html: general.childMarkdownRemark.html}} />
+
+            {photographers.map(photographer => (
+                <div key={photographer.id} className={classes.photographer}>
+                    <h2>{photographer.name}</h2>
+
+                    <div className={classes.photographerWrapper}>
+                        <img
+                            alt="Post"
+                            key={photographer.photo.responsiveResolution.src}
+                            src={photographer.photo.responsiveResolution.src}
+                            srcSet={photographer.photo.responsiveResolution.srcSet}
+                            height={photographer.photo.responsiveResolution.height}
+                            className={classes.image}
+                        />
+                        <div
+                            className={classes.photographerDescription}
+                            dangerouslySetInnerHTML={{
+                                __html: photographer.description.childMarkdownRemark.html
+                            }}
+                        />
+                    </div>
+                </div>
+            ))}
         </div>
     );
 };
@@ -59,16 +82,12 @@ export default injectSheet(styles)(About);
 
 export const pageQuery = graphql`
     query aboutPage {
-        allContentfulAbout {
+        allContentfulPhotographer {
             edges {
                 node {
                     id
-                    mySelf {
-                        childMarkdownRemark {
-                            html
-                        }
-                    }
-                    general {
+                    name
+                    description {
                         childMarkdownRemark {
                             html
                         }
@@ -79,6 +98,17 @@ export const pageQuery = graphql`
                             height
                             src
                             srcSet
+                        }
+                    }
+                }
+            }
+        }
+        allContentfulAbout {
+            edges {
+                node {
+                    general {
+                        childMarkdownRemark {
+                            html
                         }
                     }
                 }

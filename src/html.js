@@ -37,6 +37,8 @@ export default (props: Props) => (
         <body>
             <div id="___gatsby" dangerouslySetInnerHTML={{__html: props.body}} />
             {props.postBodyComponents}
+
+            <div id="fb-root" />
         </body>
     </html>
 );

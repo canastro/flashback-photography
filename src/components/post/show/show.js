@@ -1,6 +1,8 @@
 // @flow
 import React from 'react';
 import injectSheet from 'react-jss';
+import Link from 'gatsby-link';
+import slug from 'slug';
 
 import User from './user';
 import Settings from './settings';
@@ -20,7 +22,9 @@ type Props = {
 const Show = (props: Props) => {
     const {classes} = props;
     const post = props.post.edges[0].node;
-    const {description, settings, photo, date, tags, photographer} = post;
+    const {
+        description, settings, photo, date, tags, photographer
+    } = post;
 
     /**
      * Post details such as time, description and tags
@@ -33,13 +37,13 @@ const Show = (props: Props) => {
             <div className={classes.detailsContent}>
                 <p>{description}</p>
 
-                <ul className={classes.listContainer}>
+                <div className={classes.listContainer}>
                     {tags.map(tag => (
-                        <li className={classes.tag} key={tag.id}>
+                        <Link className={classes.tag} key={tag.id} to={`/tag/${slug(tag.name)}`}>
                             {tag.name}
-                        </li>
+                        </Link>
                     ))}
-                </ul>
+                </div>
 
                 <Settings settings={settings} />
             </div>

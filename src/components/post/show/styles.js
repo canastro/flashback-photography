@@ -77,8 +77,8 @@ export default {
         right: 0
     },
     listContainer: {
-        padding: 0,
-        margin: 0
+        display: 'flex',
+        flexDirection: 'column'
     },
     settingItem: {
         listStyle: 'none',
@@ -92,10 +92,13 @@ export default {
     },
     tag: {
         backgroundColor: '#ccc',
-        listStyle: 'none',
         margin: '10px 0 0 0',
-        padding: 0,
         textAlign: 'center',
-        width: 100
+        width: 100,
+        color: 'inherit',
+        textDecoration: 'none',
+        '&:hover': {
+            backgroundColor: '#696969'
+        }
     }
 };

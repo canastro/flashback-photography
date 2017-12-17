@@ -3,21 +3,22 @@ import React from 'react';
 import Link from 'gatsby-link';
 import injectSheet from 'react-jss';
 import EyeIcon from 'react-icons/lib/fa/eye';
+import slug from 'slug';
 
 import styles from './styles';
 
 type Props = {
     classes: Object,
-    post: Object
+    album: Object
 };
 
 /**
  * Create a post preview
- * @method Post
+ * @method Preview
  * @param  {Object} props - react props
- * @returns {Node} Post preview
+ * @returns {Node} Preview preview
  */
-class Post extends React.Component {
+class Preview extends React.Component {
     props: Props;
 
     /**
@@ -38,11 +39,11 @@ class Post extends React.Component {
      * @returns {Node} - react node
      */
     render() {
-        const {classes, post} = this.props;
-        const {preview, id} = post;
+        const {classes, album} = this.props;
+        const {cover, name} = album;
         return (
             <Link
-                to={`/${id}/`}
+                to={`/album/${slug(name)}/`}
                 className={classes.root}
                 onMouseEnter={() => {
                     this.setState({hovering: true});
@@ -53,9 +54,9 @@ class Post extends React.Component {
             >
                 <div className={classes.wrapper}>
                     <img
-                        alt="Post Preview"
-                        src={preview.responsiveResolution.src}
-                        srcSet={preview.responsiveResolution.srcSet}
+                        alt="Preview Preview"
+                        src={cover.responsiveResolution.src}
+                        srcSet={cover.responsiveResolution.srcSet}
                         className={classes.image}
                     />
                 </div>
@@ -65,23 +66,10 @@ class Post extends React.Component {
                         <EyeIcon className={classes.icon} />
                     </div>
                 )}
+                <div className={classes.title}>{name}</div>
             </Link>
         );
     }
 }
 
-export default injectSheet(styles)(Post);
-
-export const postFragment = graphql`
-    fragment Post_details on ContentfulPost {
-        id
-        preview: photo {
-            responsiveResolution(width: 200) {
-                width
-                height
-                src
-                srcSet
-            }
-        }
-    }
-`;
+export default injectSheet(styles)(Preview);

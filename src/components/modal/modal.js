@@ -11,29 +11,49 @@ import injectSheet from 'react-jss';
 
 import styles from './styles';
 
+Modal.setAppElement('body');
+
 type Props = {
     classes: Object,
     children: Function,
     isOpen: boolean,
     location: Object,
-    posts: Array<Object>
+    exitPathname: string,
+    posts: ?Array<Object>
 };
 
+/**
+ * Modal component
+ * @extends React
+ */
 class MyModal extends React.Component {
     props: Props;
 
+    /**
+     * Bind events
+     * @method  componentDidMount
+     */
     componentDidMount() {
         mousetrap.bind('left', () => this.previous());
         mousetrap.bind('right', () => this.next());
         mousetrap.bind('spacebar', () => this.next());
     }
 
+    /**
+     * Unbind events
+     * @method  componentWillUnmount
+     */
     componentWillUnmount() {
         mousetrap.unbind('left');
         mousetrap.unbind('right');
         mousetrap.unbind('spacebar');
     }
 
+    /**
+     * Find current post
+     * @method  findCurrentIndex
+     * @returns {Number} post index
+     */
     findCurrentIndex() {
         return findIndex(
             this.props.posts,
@@ -41,6 +61,11 @@ class MyModal extends React.Component {
         );
     }
 
+    /**
+     * Next click handler
+     * @method  next
+     * @param   {Object}   e - event
+     */
     next(e) {
         if (e) {
             e.stopPropagation();
@@ -60,6 +85,11 @@ class MyModal extends React.Component {
         }
     }
 
+    /**
+     * Previous click handler
+     * @method  next
+     * @param   {Object}   e - event
+     */
     previous(e) {
         if (e) {
             e.stopPropagation();
@@ -78,6 +108,11 @@ class MyModal extends React.Component {
         }
     }
 
+    /**
+     * Render modal
+     * @method  render
+     * @returns {Node} react node
+     */
     render() {
         const modalStyle = {
             overlay: {
@@ -102,21 +137,21 @@ class MyModal extends React.Component {
             }
         };
 
-        const {classes} = this.props;
+        const {classes, exitPathname} = this.props;
         return (
             <Modal
                 isOpen={this.props.isOpen}
-                onRequestClose={() => navigateTo('/')}
+                onRequestClose={() => navigateTo(exitPathname)}
                 style={modalStyle}
                 contentLabel="Modal"
             >
-                <div onClick={() => navigateTo('/')} className={classes.wrapper}>
+                <div onClick={() => navigateTo(exitPathname)} className={classes.wrapper}>
                     <div className={classes.caretsWrapper}>
                         <CaretLeft className={classes.caretLeft} onClick={e => this.previous(e)} />
                         {this.props.children({location: {pathname: this.props.location.pathname}})}
                         <CaretRight className={classes.caretRight} onClick={e => this.next(e)} />
                     </div>
-                    <Close onClick={() => navigateTo('/')} className={classes.close} />
+                    <Close onClick={() => navigateTo(exitPathname)} className={classes.close} />
                 </div>
             </Modal>
         );

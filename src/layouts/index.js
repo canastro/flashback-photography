@@ -8,64 +8,8 @@ import injectSheet from 'react-jss';
 // Load the css for the Space Mono font.
 import 'typeface-space-mono';
 
-import {rhythm, scale} from '../utils/typography';
-import presets from '../utils/presets';
+import styles from './styles';
 import Modal from '../components/modal/modal';
-
-const styles = {
-    root: {
-        background: 'rgba(0,0,0,0.03)',
-        minHeight: '100vh'
-    },
-    wrapper: {
-        background: 'white',
-        borderBottom: '1px solid rgba(0,0,0,0.08)'
-    },
-    linkWrapper: {
-        padding: rhythm(3 / 4),
-        paddingBottom: `calc(${rhythm(3 / 4)} - 1px)`,
-        maxWidth: 960,
-        margin: '0 auto',
-        overflow: 'hidden'
-    },
-    titleLink: {
-        display: 'inline-block',
-        float: 'left',
-        textDecoration: 'none'
-    },
-    title: {
-        ...scale(4 / 5),
-        lineHeight: 1,
-        margin: 0,
-        overflow: 'hidden'
-    },
-    titleSpan: {
-        paddingLeft: `calc(${rhythm(1)} - 1px)`,
-        borderLeft: '1px solid rgba(0,0,0,0.3)',
-        lineHeight: 1,
-        marginLeft: rhythm(1)
-    },
-    icon: {
-        top: -4,
-        display: 'inline-block',
-        position: 'relative'
-    },
-    link: {
-        color: 'inherit',
-        display: 'inline-block',
-        float: 'right',
-        lineHeight: '35px',
-        textDecoration: 'none',
-        marginLeft: 20
-    },
-    modalWrapper: {
-        maxWidth: 960,
-        margin: '0 auto',
-        [presets.Tablet]: {
-            padding: rhythm(3 / 4)
-        }
-    }
-};
 
 type Props = {
     classes: Object,
@@ -73,6 +17,28 @@ type Props = {
     location: Object
 };
 
+const listsOfPosts = ['/tag', '/album'];
+
+/**
+ * Returns true if should render the content in a modal
+ * @method  shouldRenderInModal
+ * @param   {Number} windowWidth - window width
+ * @param   {String} pathname - path name
+ * @returns {Boolean} boolean
+ */
+const shouldRenderInModal = (windowWidth, pathname) => {
+    const paths = ['/about', ...listsOfPosts];
+    if (windowWidth < 750) {
+        return false;
+    }
+
+    return pathname !== '/' && !paths.some(path => pathname.includes(path));
+};
+
+/**
+ * Layout component
+ * @extends React
+ */
 class DefaultLayout extends React.Component {
     props: Props;
 
@@ -80,14 +46,34 @@ class DefaultLayout extends React.Component {
         setPosts: PropTypes.func
     };
 
+    /**
+     * Constructor
+     * @method  constructor
+     * @param   {Object} props - react props;
+     */
+    constructor(props) {
+        super(props);
+
+        this.state = {previousPathname: '/'};
+    }
+
+    /**
+     * Provide a setPosts function in order to have posts available
+     * @method  getChildContext
+     * @returns {Object} child context functions
+     */
     getChildContext() {
         return {
-            setPosts: posts => {
+            setPosts: (posts) => {
                 this.posts = posts;
             }
         };
     }
 
+    /**
+     * React lifecycle method
+     * @method  componentDidMount
+     */
     componentDidMount() {
         // Create references to html/body elements
         this.htmlElement = document.querySelector('html');
@@ -97,14 +83,20 @@ class DefaultLayout extends React.Component {
         this.windowWidth = window.innerWidth;
     }
 
+    /**
+     * React lifecycle method
+     * @method  componentWillReceiveProps
+     * @param   {Object} nextProps - react next props
+     */
     componentWillReceiveProps(nextProps) {
+        const {pathname} = this.props.location;
+        if (listsOfPosts.some(path => pathname.includes(path)) || pathname === '/') {
+            this.setState({previousPathname: this.props.location.pathname});
+        }
+
         // if we're changing to a non-homepage page, put things in
         // a modal (unless we're on mobile).
-        if (
-            nextProps.location.pathname !== '/' &&
-            nextProps.location.pathname !== '/about/' &&
-            this.windowWidth > 750
-        ) {
+        if (shouldRenderInModal(this.windowWidth, nextProps.location.pathname)) {
             // Freeze the background from scrolling.
             this.htmlElement.style.overflow = 'hidden';
             this.bodyElement.style.overflow = 'hidden';
@@ -112,69 +104,78 @@ class DefaultLayout extends React.Component {
             // Always set overflow-y to scroll so the scrollbar stays visible avoiding
             // weird jumping.
             this.htmlElement.style.overflowY = 'scroll';
-        } else {
-            // Otherwise we're navigating back home so delete old home so the
-            // modal can be destroyed.
-            delete this.modalBackgroundChildren;
-            this.htmlElement.style.overflow = 'visible';
-            this.bodyElement.style.overflow = 'visible';
-
-            // Always set overflow-y to scroll so the scrollbar stays visible avoiding
-            // weird jumping.
-            this.htmlElement.style.overflowY = 'scroll';
+            return;
         }
+
+        // Otherwise we're navigating back home so delete old home so the
+        // modal can be destroyed.
+        delete this.modalBackgroundChildren;
+        this.htmlElement.style.overflow = 'visible';
+        this.bodyElement.style.overflow = 'visible';
+
+        // Always set overflow-y to scroll so the scrollbar stays visible avoiding
+        // weird jumping.
+        this.htmlElement.style.overflowY = 'scroll';
     }
 
+    /**
+     * Render method
+     * @method  render
+     * @returns {Node} react node
+     */
     render() {
         const {location, classes} = this.props;
-        let isModal = false;
-        if (
-            this.props.location.pathname !== '/' &&
-            this.props.location.pathname !== '/about/' &&
-            this.windowWidth > 750
-        ) {
-            isModal = true;
-        }
+        const isModal = shouldRenderInModal(this.windowWidth, this.props.location.pathname);
+        const pathname = this.state.previousPathname;
 
         return (
             <div className={classes.root}>
                 <div className={classes.wrapper}>
-                    <div className={classes.linkWrapper}>
-                        <Link to="/" className={classes.titleLink}>
-                            <h1 className={classes.title}>
-                                <CameraIcon className={classes.icon} />
-                                <span className={classes.titleSpan}>Helianthus</span>
-                            </h1>
-                        </Link>
+                    <div className={classes.header}>
+                        <div className={classes.linkWrapper}>
+                            <Link to="/" className={classes.titleLink}>
+                                <h1 className={classes.title}>
+                                    <CameraIcon className={classes.icon} />
+                                    <span className={classes.titleSpan}>Helianthus</span>
+                                </h1>
+                            </Link>
 
-                        <Link to="/about/" className={classes.link}>
-                            About
-                        </Link>
+                            <Link to="/about/" className={classes.link}>
+                                About
+                            </Link>
 
-                        <Link to="/albuns/" className={classes.link}>
-                            Albuns
-                        </Link>
+                            <Link to="/albums/" className={classes.link}>
+                                Albums
+                            </Link>
+                        </div>
+                    </div>
+
+                    <div className={classes.modalWrapper}>
+                        <div>
+                            {isModal
+                                ? this.props.children({...this.props, location: {pathname}})
+                                : this.props.children()}
+                        </div>
+
+                        <div>
+                            {isModal && (
+                                <Modal
+                                    isOpen
+                                    posts={this.posts}
+                                    location={location}
+                                    exitPathname={pathname}
+                                >
+                                    {this.props.children}
+                                </Modal>
+                            )}
+                        </div>
                     </div>
                 </div>
 
-                <div className={classes.modalWrapper}>
-                    <div>
-                        {isModal
-                            ? this.props.children({
-                                  ...this.props,
-                                  location: {pathname: '/'}
-                              })
-                            : this.props.children()}
-                    </div>
-
-                    <div>
-                        {isModal && (
-                            <Modal isOpen posts={this.posts} location={location}>
-                                {this.props.children}
-                            </Modal>
-                        )}
-                    </div>
-                </div>
+                <footer className={classes.footer}>
+                    <small>© Copyright 2008 - 2017. All rights reserved.</small>
+                    <small>Powered by Ricardo Canastro</small>
+                </footer>
             </div>
         );
     }
