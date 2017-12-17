@@ -9,6 +9,7 @@ import injectSheet from 'react-jss';
 import 'typeface-space-mono';
 
 import styles from './styles';
+import Header from '../components/header/header';
 import Modal from '../components/modal/modal';
 
 type Props = {
@@ -64,7 +65,7 @@ class DefaultLayout extends React.Component {
      */
     getChildContext() {
         return {
-            setPosts: (posts) => {
+            setPosts: posts => {
                 this.posts = posts;
             }
         };
@@ -130,27 +131,10 @@ class DefaultLayout extends React.Component {
 
         return (
             <div className={classes.root}>
-                <div className={classes.wrapper}>
-                    <div className={classes.header}>
-                        <div className={classes.linkWrapper}>
-                            <Link to="/" className={classes.titleLink}>
-                                <h1 className={classes.title}>
-                                    <CameraIcon className={classes.icon} />
-                                    <span className={classes.titleSpan}>Helianthus</span>
-                                </h1>
-                            </Link>
+                <div id="outer-container" className={classes.wrapper}>
+                    <Header />
 
-                            <Link to="/about/" className={classes.link}>
-                                About
-                            </Link>
-
-                            <Link to="/albums/" className={classes.link}>
-                                Albums
-                            </Link>
-                        </div>
-                    </div>
-
-                    <div className={classes.modalWrapper}>
+                    <div id="page-wrap" className={classes.modalWrapper}>
                         <div>
                             {isModal
                                 ? this.props.children({...this.props, location: {pathname}})

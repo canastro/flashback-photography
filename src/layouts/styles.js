@@ -1,5 +1,5 @@
 
-import {rhythm, scale} from '../utils/typography';
+import {rhythm} from '../utils/typography';
 import presets from '../utils/presets';
 
 export default {
@@ -8,47 +8,6 @@ export default {
     },
     wrapper: {
         minHeight: 'calc(100vh - 100px)'
-    },
-    header: {
-        background: 'white',
-        borderBottom: '1px solid rgba(0,0,0,0.08)'
-    },
-    linkWrapper: {
-        padding: rhythm(3 / 4),
-        paddingBottom: `calc(${rhythm(3 / 4)} - 1px)`,
-        maxWidth: 960,
-        margin: '0 auto',
-        overflow: 'hidden'
-    },
-    titleLink: {
-        display: 'inline-block',
-        float: 'left',
-        textDecoration: 'none'
-    },
-    title: {
-        ...scale(4 / 5),
-        lineHeight: 1,
-        margin: 0,
-        overflow: 'hidden'
-    },
-    titleSpan: {
-        paddingLeft: `calc(${rhythm(1)} - 1px)`,
-        borderLeft: '1px solid rgba(0,0,0,0.3)',
-        lineHeight: 1,
-        marginLeft: rhythm(1)
-    },
-    icon: {
-        top: -4,
-        display: 'inline-block',
-        position: 'relative'
-    },
-    link: {
-        color: 'inherit',
-        display: 'inline-block',
-        float: 'right',
-        lineHeight: '35px',
-        textDecoration: 'none',
-        marginLeft: 20
     },
     modalWrapper: {
         maxWidth: 960,
