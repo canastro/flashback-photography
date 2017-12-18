@@ -35,10 +35,7 @@ class Index extends React.Component {
      */
     constructor() {
         super();
-        let postsToShow = 12;
-        if (typeof window !== 'undefined') {
-            postsToShow = window.postsToShow;
-        }
+        const postsToShow = typeof window !== 'undefined' ? window.postsToShow : 12;
 
         this.state = {
             showingMore: postsToShow > 12,

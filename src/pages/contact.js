@@ -64,158 +64,158 @@ type Props = {
  * @extends React
  */
 class Contact extends React.Component {
-  props: Props;
+    props: Props;
 
-  /**
-   * Constructor, bind callbacks and initializes state
-   * @method  constructor
-   * @param   {Object}    props - react props
-   */
-  constructor(props) {
-      super(props);
-      this.state = {
-          name: '',
-          email: '',
-          subject: '',
-          text: '',
-          errors: {},
-          isLoading: false
-      };
+    /**
+     * Constructor, bind callbacks and initializes state
+     * @method  constructor
+     * @param   {Object}    props - react props
+     */
+    constructor(props) {
+        super(props);
+        this.state = {
+            name: '',
+            email: '',
+            subject: '',
+            text: '',
+            errors: {},
+            isLoading: false
+        };
 
-      this.handleChange = this.handleChange.bind(this);
-      this.handleSubmit = this.handleSubmit.bind(this);
-  }
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
 
-  /**
-   * Handle input change
-   * @method  handleChange
-   * @param   {Object}     key - changed key
-   * @returns {Function} callback function
-   */
-  handleChange(key: string): Function {
-      return (event: Object) => {
-          this.setState({[key]: event.target.value});
-      };
-  }
+    /**
+     * Handle input change
+     * @method  handleChange
+     * @param   {Object}     key - changed key
+     * @returns {Function} callback function
+     */
+    handleChange(key: string): Function {
+        return (event: Object) => {
+            this.setState({[key]: event.target.value});
+        };
+    }
 
-  /**
-   * Handle form submission
-   * @method  handleSubmit
-   * @param   {Object}     event - submit event
-   * @returns {Promise} http call promise
-   */
-  handleSubmit(event) {
-      event.preventDefault();
+    /**
+     * Handle form submission
+     * @method  handleSubmit
+     * @param   {Object}     event - submit event
+     * @returns {Promise} http call promise
+     */
+    handleSubmit(event) {
+        event.preventDefault();
 
-      if (!isEmailValid(this.state.email)) {
-          this.setState({
-              errors: {email: 'Invalid Email'}
-          });
-          return Promise.resolve();
-      }
+        if (!isEmailValid(this.state.email)) {
+            this.setState({
+                errors: {email: 'Invalid Email'}
+            });
+            return Promise.resolve();
+        }
 
-      this.setState({isLoading: true});
+        this.setState({isLoading: true});
 
-      const {
-          name, email, subject, text
-      } = this.state;
+        const {
+            name, email, subject, text
+        } = this.state;
 
-      return emailjs
-          .send('default_service', 'basic', {
-              name,
-              email,
-              subject,
-              text
-          })
-          .then(() => {
-              this.setState({isLoading: false});
-          });
-  }
+        return emailjs
+            .send('default_service', 'basic', {
+                name,
+                email,
+                subject,
+                text
+            })
+            .then(() => {
+                this.setState({isLoading: false});
+            });
+    }
 
-  /**
-   * Render form
-   * @method  render
-   * @returns {Node} react node
-   */
-  render() {
-      const {classes} = this.props;
+    /**
+     * Render form
+     * @method  render
+     * @returns {Node} react node
+     */
+    render() {
+        const {classes} = this.props;
 
-      return (
-          <form className={classes.root} onSubmit={this.handleSubmit}>
-              {this.state.isLoading && <Loader />}
-              <h1>Contact</h1>
-              <label className={classes.inputWrapper} htmlFor="name">
-                  <span>
+        return (
+            <form className={classes.root} onSubmit={this.handleSubmit}>
+                {this.state.isLoading && <Loader />}
+                <h1>Contact</h1>
+                <label className={classes.inputWrapper} htmlFor="name">
+                    <span>
                     Name<sup className={classes.sup}>*</sup>
-                  </span>
-                  <input
-                      className={classes.input}
-                      name="name"
-                      type="text"
-                      required
-                      value={this.state.name}
-                      onChange={this.handleChange('name')}
-                  />
-                  {this.state.errors.name && (
-                      <span className={classes.error}>{this.state.errors.name}</span>
-                  )}
-              </label>
+                    </span>
+                    <input
+                        className={classes.input}
+                        name="name"
+                        type="text"
+                        required
+                        value={this.state.name}
+                        onChange={this.handleChange('name')}
+                    />
+                    {this.state.errors.name && (
+                        <span className={classes.error}>{this.state.errors.name}</span>
+                    )}
+                </label>
 
-              <label className={classes.inputWrapper} htmlFor="email">
-                  <span>
+                <label className={classes.inputWrapper} htmlFor="email">
+                    <span>
                     Email address<sup className={classes.sup}>*</sup>
-                  </span>
-                  <input
-                      className={classes.input}
-                      name="email"
-                      type="text"
-                      required
-                      value={this.state.email}
-                      onChange={this.handleChange('email')}
-                  />
-                  {this.state.errors.email && (
-                      <span className={classes.error}>{this.state.errors.email}</span>
-                  )}
-              </label>
+                    </span>
+                    <input
+                        className={classes.input}
+                        name="email"
+                        type="text"
+                        required
+                        value={this.state.email}
+                        onChange={this.handleChange('email')}
+                    />
+                    {this.state.errors.email && (
+                        <span className={classes.error}>{this.state.errors.email}</span>
+                    )}
+                </label>
 
-              <label className={classes.inputWrapper} htmlFor="subject">
-                  <span>
+                <label className={classes.inputWrapper} htmlFor="subject">
+                    <span>
                     Subject<sup className={classes.sup}>*</sup>
-                  </span>
-                  <input
-                      className={classes.input}
-                      name="subject"
-                      type="text"
-                      required
-                      value={this.state.subject}
-                      onChange={this.handleChange('subject')}
-                  />
-                  {this.state.errors.subject && (
-                      <span className={classes.error}>{this.state.errors.subject}</span>
-                  )}
-              </label>
+                    </span>
+                    <input
+                        className={classes.input}
+                        name="subject"
+                        type="text"
+                        required
+                        value={this.state.subject}
+                        onChange={this.handleChange('subject')}
+                    />
+                    {this.state.errors.subject && (
+                        <span className={classes.error}>{this.state.errors.subject}</span>
+                    )}
+                </label>
 
-              <label className={classes.text} htmlFor="text">
-                  <span>
+                <label className={classes.text} htmlFor="text">
+                    <span>
                     Text<sup className={classes.sup}>*</sup>
-                  </span>
-                  <textarea
-                      className={classes.input}
-                      rows={6}
-                      name="text"
-                      required
-                      value={this.state.text}
-                      onChange={this.handleChange('text')}
-                  />
-                  {this.state.errors.text && (
-                      <span className={classes.error}>{this.state.errors.text}</span>
-                  )}
-              </label>
+                    </span>
+                    <textarea
+                        className={classes.input}
+                        rows={6}
+                        name="text"
+                        required
+                        value={this.state.text}
+                        onChange={this.handleChange('text')}
+                    />
+                    {this.state.errors.text && (
+                        <span className={classes.error}>{this.state.errors.text}</span>
+                    )}
+                </label>
 
-              <input className={classes.button} type="submit" value="Submit" />
-          </form>
-      );
-  }
+                <input className={classes.button} type="submit" value="Submit" />
+            </form>
+        );
+    }
 }
 
 export default injectSheet(styles)(Contact);
