@@ -1,9 +1,8 @@
 // @flow
 import * as PropTypes from 'prop-types';
 import React from 'react';
-import CameraIcon from 'react-icons/lib/io/ios-flower';
-import Link from 'gatsby-link';
 import injectSheet from 'react-jss';
+import Helmet from 'react-helmet';
 
 // Load the css for the Space Mono font.
 import 'typeface-space-mono';
@@ -28,7 +27,7 @@ const listsOfPosts = ['/tag', '/album'];
  * @returns {Boolean} boolean
  */
 const shouldRenderInModal = (windowWidth, pathname) => {
-    const paths = ['/about', ...listsOfPosts];
+    const paths = ['/about', '/contact', ...listsOfPosts];
     if (windowWidth < 750) {
         return false;
     }
@@ -131,6 +130,7 @@ class DefaultLayout extends React.Component {
 
         return (
             <div className={classes.root}>
+                <Helmet title="Helianthus" />
                 <div id="outer-container" className={classes.wrapper}>
                     <Header />
 

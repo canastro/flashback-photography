@@ -21,6 +21,9 @@ const isMobile = window.innerWidth <= 750;
  */
 const getMenu = (classes: Object) => {
     const baseMenus = [
+        <Link key="contact" to="/contact/" className={classes.link}>
+            Contact
+        </Link>,
         <Link key="about" to="/about/" className={classes.link}>
             About
         </Link>,

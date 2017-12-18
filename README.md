@@ -2,3 +2,4 @@
 * Close mobile menu on click
 * Menu resize : https://goshakkk.name/different-mobile-desktop-tablet-layouts-react/
 * Use redux
+* Add unit tests
