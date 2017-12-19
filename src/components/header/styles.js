@@ -3,7 +3,7 @@ import presets from '../../utils/presets';
 
 export const burgerStyles = {
     bmBurgerButton: {
-        position: 'fixed',
+        position: 'absolute',
         width: '36px',
         height: '30px',
         left: 'initial',

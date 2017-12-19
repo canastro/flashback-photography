@@ -1,6 +1,6 @@
 // @flow
-import * as PropTypes from 'prop-types';
 import React from 'react';
+import {connect} from 'react-redux';
 import injectSheet from 'react-jss';
 import Helmet from 'react-helmet';
 
@@ -14,7 +14,8 @@ import Modal from '../components/modal/modal';
 type Props = {
     classes: Object,
     children: Function,
-    location: Object
+    location: Object,
+    posts: Array<Object>
 };
 
 const listsOfPosts = ['/tag', '/album'];
@@ -27,12 +28,11 @@ const listsOfPosts = ['/tag', '/album'];
  * @returns {Boolean} boolean
  */
 const shouldRenderInModal = (windowWidth, pathname) => {
-    const paths = ['/about', '/contact', ...listsOfPosts];
     if (windowWidth < 750) {
         return false;
     }
 
-    return pathname !== '/' && !paths.some(path => pathname.includes(path));
+    return pathname.includes('/post');
 };
 
 /**
@@ -41,10 +41,6 @@ const shouldRenderInModal = (windowWidth, pathname) => {
  */
 class DefaultLayout extends React.Component {
     props: Props;
-
-    static childContextTypes = {
-        setPosts: PropTypes.func
-    };
 
     /**
      * Constructor
@@ -55,19 +51,6 @@ class DefaultLayout extends React.Component {
         super(props);
 
         this.state = {previousPathname: '/'};
-    }
-
-    /**
-     * Provide a setPosts function in order to have posts available
-     * @method  getChildContext
-     * @returns {Object} child context functions
-     */
-    getChildContext() {
-        return {
-            setPosts: posts => {
-                this.posts = posts;
-            }
-        };
     }
 
     /**
@@ -124,7 +107,7 @@ class DefaultLayout extends React.Component {
      * @returns {Node} react node
      */
     render() {
-        const {location, classes} = this.props;
+        const {location, posts, classes} = this.props;
         const isModal = shouldRenderInModal(this.windowWidth, this.props.location.pathname);
         const pathname = this.state.previousPathname;
 
@@ -145,7 +128,7 @@ class DefaultLayout extends React.Component {
                             {isModal && (
                                 <Modal
                                     isOpen
-                                    posts={this.posts}
+                                    posts={posts}
                                     location={location}
                                     exitPathname={pathname}
                                 >
@@ -157,7 +140,7 @@ class DefaultLayout extends React.Component {
                 </div>
 
                 <footer className={classes.footer}>
-                    <small>© Copyright 2008 - 2017. All rights reserved.</small>
+                    <small><span role="img" aria-label="">©</span> Copyright 2008 - 2017. All rights reserved.</small>
                     <small>Powered by Ricardo Canastro</small>
                 </footer>
             </div>
@@ -165,4 +148,14 @@ class DefaultLayout extends React.Component {
     }
 }
 
-export default injectSheet(styles)(DefaultLayout);
+/**
+ * Maps the state
+ * @param {Object} state - redux store
+ * @returns {Object} mapped state
+ */
+const mapStateToProps = (state: Object) => {
+    console.log(state);
+    return {posts: state.photos.posts};
+};
+
+export default injectSheet(styles)(connect(mapStateToProps, {})(DefaultLayout));

@@ -31,7 +31,7 @@ exports.createPages = ({graphql, boundActionCreators}) => {
             const postTemplate = path.resolve('src/templates/post-page.js');
             _.each(result.data.allContentfulPost.edges, (edge) => {
                 createPage({
-                    path: `/${slug(edge.node.id)}/`,
+                    path: `/post/${slug(edge.node.id)}/`,
                     component: slash(postTemplate),
                     context: {
                         id: edge.node.id

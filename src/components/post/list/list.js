@@ -1,21 +1,16 @@
 // @flow
-
-import * as PropTypes from 'prop-types';
-import chunk from 'lodash/chunk';
 import React from 'react';
+import chunk from 'lodash/chunk';
 import injectSheet from 'react-jss';
 
 import Post from '../preview/preview';
 import styles from './styles';
 
-// This would normally be in a Redux store or some other global data store.
-if (typeof window !== 'undefined') {
-    window.postsToShow = 12;
-}
-
 type Props = {
     classes: Object,
-    posts: ?Array<Object>
+    posts: ?Array<Object>,
+    visiblePosts: number,
+    onVisiblePostsChange: Function
 };
 
 /**
@@ -25,21 +20,16 @@ type Props = {
 class Index extends React.Component {
     props: Props;
 
-    static contextTypes = {
-        setPosts: PropTypes.func
-    };
-
     /**
      * Constructor - initializes the state
      * @method  constructor
+     * @param {Object} props - react props
      */
-    constructor() {
-        super();
-        const postsToShow = typeof window !== 'undefined' ? window.postsToShow : 12;
+    constructor(props: Props) {
+        super(props);
 
         this.state = {
-            showingMore: postsToShow > 12,
-            postsToShow
+            showingMore: props.visiblePosts > 12
         };
     }
 
@@ -58,7 +48,6 @@ class Index extends React.Component {
      */
     componentWillUnmount() {
         window.removeEventListener('scroll', this.handleScroll);
-        window.postsToShow = this.state.postsToShow;
     }
 
     /**
@@ -69,8 +58,8 @@ class Index extends React.Component {
         const distanceToBottom =
             document.documentElement.offsetHeight - (window.scrollY + window.innerHeight);
 
-        if (this.state.showingMore && distanceToBottom < 100) {
-            this.setState({postsToShow: this.state.postsToShow + 12});
+        if (this.state.showingMore && distanceToBottom < 100 && this.props.posts.length % 12 === 0) {
+            this.props.onVisiblePostsChange(this.props.visiblePosts + 12);
         }
 
         this.ticking = false;
@@ -93,8 +82,9 @@ class Index extends React.Component {
      * @method  handleMoreClick
      */
     handleMoreClick = () => {
+        this.props.onVisiblePostsChange(this.props.visiblePosts + 12);
+
         this.setState({
-            postsToShow: this.state.postsToShow + 12,
             showingMore: true
         });
     };
@@ -106,11 +96,10 @@ class Index extends React.Component {
      */
     render() {
         const {classes, posts = []} = this.props;
-        this.context.setPosts(posts);
 
         return (
             <div className={classes.root}>
-                {chunk(posts.slice(0, this.state.postsToShow), 3).map((item, i) => (
+                {chunk(posts.slice(0, this.props.visiblePosts), 3).map((item, i) => (
                     <div key={`chunk-${i}`} className={classes.postsChunk}>
                         {item.map(node => (
                             <Post

@@ -4,7 +4,6 @@ import Modal from 'react-modal';
 import CaretRight from 'react-icons/lib/fa/caret-right';
 import CaretLeft from 'react-icons/lib/fa/caret-left';
 import Close from 'react-icons/lib/md/close';
-import findIndex from 'lodash/findIndex';
 import mousetrap from 'mousetrap';
 import {navigateTo} from 'gatsby-link';
 import injectSheet from 'react-jss';
@@ -55,10 +54,9 @@ class MyModal extends React.Component {
      * @returns {Number} post index
      */
     findCurrentIndex() {
-        return findIndex(
-            this.props.posts,
-            post => post.id === this.props.location.pathname.split('/')[1]
-        );
+        const id = this.props.location.pathname.split('/post/')[1];
+        const postId = id.endsWith('/') ? id.slice(0, -1) : id;
+        return this.props.posts.findIndex(post => post.id === postId);
     }
 
     /**
@@ -81,7 +79,7 @@ class MyModal extends React.Component {
             } else {
                 nextPost = posts[currentIndex + 1];
             }
-            navigateTo(`/${nextPost.id}/`);
+            navigateTo(`/post/${nextPost.id}/`);
         }
     }
 
@@ -104,7 +102,7 @@ class MyModal extends React.Component {
             } else {
                 previousPost = posts[currentIndex - 1];
             }
-            navigateTo(`/${previousPost.id}/`);
+            navigateTo(`/post/${previousPost.id}/`);
         }
     }
 

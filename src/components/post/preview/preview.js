@@ -42,7 +42,7 @@ class Post extends React.Component {
         const {preview, id} = post;
         return (
             <Link
-                to={`/${id}/`}
+                to={`/post/${id}/`}
                 className={classes.root}
                 onMouseEnter={() => {
                     this.setState({hovering: true});
