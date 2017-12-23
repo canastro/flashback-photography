@@ -34,6 +34,7 @@
     "lodash": "^4.17.4",
     "mousetrap": "^1.6.1",
     "react-burger-menu": "^2.1.11",
+    "react-hammerjs": "^1.0.1",
     "react-helmet": "^5.2.0",
     "react-icons": "^2.2.7",
     "react-jss": "^8.1.0",

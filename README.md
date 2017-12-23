@@ -3,6 +3,6 @@
 * Add unit tests
 
 * Menu hover is white, unreadable
-* Initial loading
 * Facebook share
 * Favicon
+* Slide left to see other pictures on mobile

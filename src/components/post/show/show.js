@@ -1,6 +1,7 @@
 // @flow
 import React from 'react';
 import injectSheet from 'react-jss';
+import Hammer from 'react-hammerjs';
 import Link from 'gatsby-link';
 import slug from 'slug';
 
@@ -10,7 +11,8 @@ import styles from './styles';
 
 type Props = {
     classes: Object,
-    post: Object
+    post: Object,
+    onSwipe?: ?Function
 };
 
 /**
@@ -58,15 +60,17 @@ const Show = (props: Props) => {
                 </div>
             </div>
             <div className={classes.imageContainer}>
-                <div className={classes.imageWrapper}>
-                    <img
-                        alt="Post"
-                        key={photo.responsiveResolution.src}
-                        src={photo.responsiveResolution.src}
-                        srcSet={photo.responsiveResolution.srcSet}
-                        className={classes.image}
-                    />
-                </div>
+                <Hammer onSwipe={props.onSwipe}>
+                    <div className={classes.imageWrapper}>
+                        <img
+                            alt="Post"
+                            key={photo.responsiveResolution.src}
+                            src={photo.responsiveResolution.src}
+                            srcSet={photo.responsiveResolution.srcSet}
+                            className={classes.image}
+                        />
+                    </div>
+                </Hammer>
             </div>
             <div className={classes.mobileDetailsWrapper}>
                 <PostDetails />
