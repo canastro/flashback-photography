@@ -9,6 +9,12 @@ module.exports = {
         'gatsby-plugin-react-helmet',
         'gatsby-plugin-offline',
         {
+            resolve: 'gatsby-plugin-typography',
+            options: {
+                pathToConfigModule: 'src/utils/typography'
+            }
+        },
+        {
             resolve: 'gatsby-plugin-manifest',
             options: {
                 name: 'Flashback',
@@ -29,7 +35,8 @@ module.exports = {
             resolve: 'gatsby-source-contentful',
             options: {
                 spaceId: 'n304sk2sx2c2',
-                accessToken: '9b72f183a20c20de197bcdf5818f41c742a164eff7dc20f32324ccded7bf00a9'
+                accessToken:
+          '9b72f183a20c20de197bcdf5818f41c742a164eff7dc20f32324ccded7bf00a9'
             }
         }
     ]

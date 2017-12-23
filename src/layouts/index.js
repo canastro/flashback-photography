@@ -153,9 +153,6 @@ class DefaultLayout extends React.Component {
  * @param {Object} state - redux store
  * @returns {Object} mapped state
  */
-const mapStateToProps = (state: Object) => {
-    console.log(state);
-    return {posts: state.photos.posts};
-};
+const mapStateToProps = (state: Object) => ({posts: state.photos.posts});
 
-export default injectSheet(styles)(connect(mapStateToProps, {})(DefaultLayout));
+export default connect(mapStateToProps, {})(injectSheet(styles)(DefaultLayout));
