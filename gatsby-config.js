@@ -1,6 +1,6 @@
 module.exports = {
     siteMetadata: {
-        title: 'Helianthus'
+        title: 'Flashback'
     },
     plugins: [
         'gatsby-transformer-remark',
@@ -11,8 +11,8 @@ module.exports = {
         {
             resolve: 'gatsby-plugin-manifest',
             options: {
-                name: 'Helianthus',
-                short_name: 'Helianthus',
+                name: 'Flashback',
+                short_name: 'Flashback',
                 start_url: '/',
                 background_color: '#f7f7f7',
                 theme_color: '#191919',

@@ -113,7 +113,7 @@ class DefaultLayout extends React.Component {
 
         return (
             <div className={classes.root}>
-                <Helmet title="Helianthus" />
+                <Helmet title="Flashback" />
                 <div id="outer-container" className={classes.wrapper}>
                     <Header />
 

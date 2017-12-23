@@ -117,7 +117,7 @@ class Header extends React.Component {
                   <Link to="/" className={classes.titleLink}>
                       <h1 className={classes.title}>
                           <FlowerIcon className={classes.icon} />
-                          <span className={classes.titleSpan}>Helianthus</span>
+                          <span className={classes.titleSpan}>Flashback</span>
                       </h1>
                   </Link>
 
