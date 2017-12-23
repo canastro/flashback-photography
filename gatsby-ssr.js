@@ -41,13 +41,14 @@ exports.onRenderBody = ({setPostBodyComponents}) =>
             key="emailjs-dist"
             type="text/javascript"
             src="https://cdn.emailjs.com/dist/email.min.js"
+            onload="initEmailjs()"
         />,
         <script
             async
             key="emailjs-initialize"
             type="text/javascript"
             dangerouslySetInnerHTML={{
-                __html: '(function(){emailjs.init("user_miNvmuNB4AxQqC3Ebfu5K");})();'
+                __html: '(function initEmailjs(){emailjs.init("user_miNvmuNB4AxQqC3Ebfu5K");})'
             }}
         />
     ]);

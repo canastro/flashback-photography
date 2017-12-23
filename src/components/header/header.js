@@ -57,6 +57,10 @@ class Header extends React.Component {
    * @returns {Node} react node
    */
   buildMenu() {
+      if (typeof this.isMobile === 'undefined') {
+          return null;
+      }
+
       const {classes} = this.props;
 
       const baseMenus = [
