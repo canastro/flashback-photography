@@ -22,7 +22,19 @@ module.exports = {
                 start_url: '/',
                 background_color: '#f7f7f7',
                 theme_color: '#191919',
-                display: 'minimal-ui'
+                display: 'minimal-ui',
+                icons: [
+                    {
+                        src: '/favicons/camera-192x192.png',
+                        sizes: '192x192',
+                        type: 'image/png'
+                    },
+                    {
+                        src: '/favicons/camera-512x512.png',
+                        sizes: '512x512',
+                        type: 'image/png'
+                    }
+                ]
             }
         },
         {

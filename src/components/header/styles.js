@@ -46,7 +46,12 @@ export const burgerStyles = {
 export default {
     root: {
         background: 'white',
-        borderBottom: '1px solid rgba(0,0,0,0.08)'
+        borderBottom: '1px solid rgba(0,0,0,0.08)',
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        zIndex: 1
     },
     wrapper: {
         maxWidth: 960,

@@ -12,6 +12,7 @@ export default {
     modalWrapper: {
         maxWidth: 960,
         margin: '0 auto',
+        marginTop: 75,
         [presets.Tablet]: {
             padding: rhythm(3 / 4)
         }

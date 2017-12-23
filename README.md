@@ -2,7 +2,5 @@
 * Menu resize : https://goshakkk.name/different-mobile-desktop-tablet-layouts-react/
 * Add unit tests
 
-* Menu hover is white, unreadable
 * Facebook share
 * Favicon
-* Slide left to see other pictures on mobile
