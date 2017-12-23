@@ -9,14 +9,18 @@ import {navigateTo} from 'gatsby-link';
  * @returns {Function} redux thunk
  */
 export const navigate = (posts, currentPostId, direction) => () => {
-    console.log('next');
     const currentIndex = posts.findIndex(post => post.id === currentPostId);
 
     if (direction === 'next') {
-        return navigateTo(`/post/${posts[currentIndex + 1].id}/`);
+        if (currentIndex + 1 >= posts.length) return;
+
+        navigateTo(`/post/${posts[currentIndex + 1].id}/`);
+        return;
     }
 
-    return navigateTo(`/post/${posts[currentIndex - 1].id}/`);
+    if (currentIndex - 1 < 0) return;
+
+    navigateTo(`/post/${posts[currentIndex - 1].id}/`);
 };
 
 /**
