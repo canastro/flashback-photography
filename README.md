@@ -4,3 +4,5 @@
 
 * Facebook share
 * Favicon
+
+* add privacy policy url: https://developers.facebook.com/apps/1593275980765181/app-details/
