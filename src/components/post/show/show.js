@@ -61,12 +61,14 @@ const Show = (props: Props) => {
         </div>
     );
 
+    const location = typeof window !== 'undefined' && window && window.location;
+
     return (
         <div className={classes.root} onClick={e => e.stopPropagation()}>
             <Helmet>
                 <meta
                     property="og:url"
-                    content={window.location.href}
+                    content={location.href}
                 />
                 <meta property="og:type" content="article" />
                 <meta
