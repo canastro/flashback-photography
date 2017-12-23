@@ -10,8 +10,6 @@ import injectSheet from 'react-jss';
 
 import styles from './styles';
 
-Modal.setAppElement('body');
-
 type Props = {
     classes: Object,
     children: Function,
@@ -33,6 +31,8 @@ class MyModal extends React.Component {
      * @method  componentDidMount
      */
     componentDidMount() {
+        Modal.setAppElement('body');
+
         mousetrap.bind('left', () => this.previous());
         mousetrap.bind('right', () => this.next());
         mousetrap.bind('spacebar', () => this.next());

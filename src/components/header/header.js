@@ -11,8 +11,6 @@ type Props = {
   classes: Object
 };
 
-const isMobile = window.innerWidth <= 750;
-
 /**
  * Header component
  */
@@ -27,6 +25,13 @@ class Header extends React.Component {
       super(props);
 
       this.state = {isOpen: false};
+  }
+
+  /**
+   * Lifecycle method
+   */
+  componentDidMount() {
+      this.isMobile = window && window.innerWidth > 750;
   }
 
   /**
@@ -81,7 +86,7 @@ class Header extends React.Component {
           </Link>
       ];
 
-      if (!isMobile) {
+      if (this.isMobile) {
           return baseMenus;
       }
 

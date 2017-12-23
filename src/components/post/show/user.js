@@ -54,7 +54,8 @@ type Props = {
  * @returns {Node} react node
  */
 const User = (props: Props) => {
-    const uri = encodeURIComponent(window.location.href);
+    const location = typeof window !== 'undefined' && window && window.location;
+    const uri = encodeURIComponent(location.href);
 
     return (
         <div className={props.classes.root}>

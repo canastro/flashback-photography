@@ -95,11 +95,12 @@ class Index extends React.Component {
      * @returns {Node} react node
      */
     render() {
-        const {classes, posts = []} = this.props;
+        const {classes, posts} = this.props;
+        const items = chunk((posts || []).slice(0, this.props.visiblePosts), 3);
 
         return (
             <div className={classes.root}>
-                {chunk(posts.slice(0, this.props.visiblePosts), 3).map((item, i) => (
+                {items.map((item, i) => (
                     <div key={`chunk-${i}`} className={classes.postsChunk}>
                         {item.map(node => (
                             <Post
