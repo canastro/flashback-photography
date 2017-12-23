@@ -1,5 +1,4 @@
 import {rhythm, scale} from '../../utils/typography';
-import presets from '../../utils/presets';
 
 export const burgerStyles = {
     bmBurgerButton: {
@@ -50,8 +49,6 @@ export default {
         borderBottom: '1px solid rgba(0,0,0,0.08)'
     },
     wrapper: {
-        // padding: rhythm(3 / 4),
-        paddingBottom: `calc(${rhythm(3 / 4)} - 1px)`,
         maxWidth: 960,
         margin: '0 auto',
         overflow: 'hidden',
@@ -90,10 +87,7 @@ export default {
         textDecoration: 'none',
         marginLeft: 20,
         '&:hover': {
-            color: '#fff',
-            [presets.Tablet]: {
-                color: '#000'
-            }
+            color: '#000'
         }
     }
 };

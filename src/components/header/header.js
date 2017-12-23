@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import FlowerIcon from 'react-icons/lib/io/ios-flower';
+import CameraRetroIcon from 'react-icons/lib/fa/camera-retro';
 import Link from 'gatsby-link';
 import injectSheet from 'react-jss';
 import {slide as Menu} from 'react-burger-menu';
@@ -121,7 +121,7 @@ class Header extends React.Component {
               <div className={classes.wrapper}>
                   <Link to="/" className={classes.titleLink}>
                       <h1 className={classes.title}>
-                          <FlowerIcon className={classes.icon} />
+                          <CameraRetroIcon className={classes.icon} />
                           <span className={classes.titleSpan}>Flashback</span>
                       </h1>
                   </Link>
