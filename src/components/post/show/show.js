@@ -1,6 +1,7 @@
 // @flow
 import React from 'react';
 import injectSheet from 'react-jss';
+import {Helmet} from 'react-helmet';
 import Hammer from 'react-hammerjs';
 import Link from 'gatsby-link';
 import slug from 'slug';
@@ -10,9 +11,9 @@ import Settings from './settings';
 import styles from './styles';
 
 type Props = {
-    classes: Object,
-    post: Object,
-    onSwipe?: ?Function
+  classes: Object,
+  post: Object,
+  onSwipe?: ?Function
 };
 
 /**
@@ -29,19 +30,27 @@ const Show = (props: Props) => {
     } = post;
 
     /**
-     * Post details such as time, description and tags
-     * @method PostDetails
-     * @returns {Node} react node
-     */
+   * Post details such as time, description and tags
+   * @method PostDetails
+   * @returns {Node} react node
+   */
     const PostDetails = () => (
         <div className={classes.detailsContainer}>
-            <User avatar={photographer.photo} username={photographer.name} date={date} />
+            <User
+                avatar={photographer.photo}
+                username={photographer.name}
+                date={date}
+            />
             <div className={classes.detailsContent}>
                 <p>{description}</p>
 
                 <div className={classes.listContainer}>
                     {tags.map(tag => (
-                        <Link className={classes.tag} key={tag.id} to={`/tag/${slug(tag.name)}`}>
+                        <Link
+                            className={classes.tag}
+                            key={tag.id}
+                            to={`/tag/${slug(tag.name)}`}
+                        >
                             {tag.name}
                         </Link>
                     ))}
@@ -54,6 +63,25 @@ const Show = (props: Props) => {
 
     return (
         <div className={classes.root} onClick={e => e.stopPropagation()}>
+            <Helmet>
+                <meta
+                    property="og:url"
+                    content={window.location.href}
+                />
+                <meta property="og:type" content="article" />
+                <meta
+                    property="og:title"
+                    content={`Photo by ${photographer.name}`}
+                />
+                <meta
+                    property="og:description"
+                    content={description}
+                />
+                <meta
+                    property="og:image"
+                    content={photo.responsiveResolution.src}
+                />
+            </Helmet>
             <div className={classes.tabletDetailsContainer}>
                 <div className={classes.tabletDetailsWrapper}>
                     <PostDetails />
@@ -82,40 +110,40 @@ const Show = (props: Props) => {
 export default injectSheet(styles)(Show);
 
 export const postDetailFragment = graphql`
-    fragment PostDetail_details on ContentfulPost {
-        id
-        description
-        date(formatString: "DD MMMM, YYYY")
-        tags {
-            id
-            name
-        }
-        photo {
-            responsiveResolution(width: 640) {
-                width
-                height
-                src
-                srcSet
-            }
-        }
-        settings {
-            machine
-            focalLength
-            aperture
-            exposureTime
-            iso
-            flash
-        }
-        photographer {
-          name
-          photo {
-              responsiveResolution(width: 30) {
-                  width
-                  height
-                  src
-                  srcSet
-              }
-          }
-        }
+  fragment PostDetail_details on ContentfulPost {
+    id
+    description
+    date(formatString: "DD MMMM, YYYY")
+    tags {
+      id
+      name
     }
+    photo {
+      responsiveResolution(width: 640) {
+        width
+        height
+        src
+        srcSet
+      }
+    }
+    settings {
+      machine
+      focalLength
+      aperture
+      exposureTime
+      iso
+      flash
+    }
+    photographer {
+      name
+      photo {
+        responsiveResolution(width: 30) {
+          width
+          height
+          src
+          srcSet
+        }
+      }
+    }
+  }
 `;
