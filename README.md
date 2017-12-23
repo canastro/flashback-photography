@@ -4,3 +4,5 @@
 
 * Menu hover is white, unreadable
 * Initial loading
+* Facebook share
+* Favicon
