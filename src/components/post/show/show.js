@@ -68,7 +68,7 @@ const Show = (props: Props) => {
             <Helmet>
                 <meta
                     property="og:url"
-                    content={location.href}
+                    content={`https:${location.href}`}
                 />
                 <meta property="og:type" content="article" />
                 <meta
@@ -82,6 +82,10 @@ const Show = (props: Props) => {
                 <meta
                     property="og:image"
                     content={photo.responsiveResolution.src}
+                />
+                <meta
+                    property="fb:app_id"
+                    content="1593275980765181"
                 />
             </Helmet>
             <div className={classes.tabletDetailsContainer}>
