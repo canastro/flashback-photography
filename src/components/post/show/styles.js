@@ -3,18 +3,19 @@ import typography, {rhythm, scale} from '../../../utils/typography';
 
 export default {
     root: {
-        background: 'white',
+        maxHeight: 500,
+        backgroundColor: 'black',
         display: 'flex',
         alignItems: 'stretch',
         flexDirection: 'column',
         width: '100%',
         [presets.Tablet]: {
-            flexDirection: 'row-reverse',
-            marginTop: rhythm(1)
+            flexDirection: 'row-reverse'
         }
     },
     detailsContainer: {
         ...scale(-2 / 5),
+        backgroundColor: 'white',
         lineHeight: typography.options.baseLineHeight,
         height: '100%'
     },
@@ -29,6 +30,7 @@ export default {
         float: 'right'
     },
     tabletDetailsContainer: {
+        backgroundColor: 'white',
         padding: rhythm(3 / 4),
         paddingBottom: 0,
         [presets.Tablet]: {
@@ -52,29 +54,9 @@ export default {
         }
     },
     imageContainer: {
-        display: 'block',
         backgroundColor: 'lightgray',
-        flex: '1 0 0%',
-        width: '100%',
-        position: 'relative'
-    },
-    imageWrapper: {
-        flexDirection: 'column',
-        flexShrink: 0,
-        position: 'relative',
-        paddingBottom: '100%',
-        overflow: 'hidden'
-    },
-    image: {
-        margin: 0,
-        height: '100%',
-        width: '100%',
-        verticalAlign: 'baseline',
-        position: 'absolute',
-        top: 0,
-        bottom: 0,
-        left: 0,
-        right: 0
+        flex: '1 0 0',
+        margin: 'auto'
     },
     listContainer: {
         display: 'flex',

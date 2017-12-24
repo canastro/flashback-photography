@@ -115,7 +115,7 @@ class MyModal extends React.Component {
         const modalStyle = {
             overlay: {
                 position: 'fixed',
-                top: 0,
+                top: 75,
                 left: 0,
                 right: 0,
                 bottom: 0,
