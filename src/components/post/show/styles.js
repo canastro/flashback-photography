@@ -56,7 +56,8 @@ export default {
     imageContainer: {
         backgroundColor: 'lightgray',
         flex: '1 0 0',
-        margin: 'auto'
+        margin: 'auto',
+        width: '100%'
     },
     listContainer: {
         display: 'flex',
