@@ -2,7 +2,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import injectSheet from 'react-jss';
-import Helmet from 'react-helmet';
+import {Helmet} from 'react-helmet';
 
 // Load the css for the Space Mono font.
 import 'typeface-space-mono';
@@ -113,7 +113,15 @@ class DefaultLayout extends React.Component {
 
         return (
             <div className={classes.root}>
-                <Helmet title="Flashback" />
+                <Helmet>
+                    <title>Flashback</title>
+                    <meta charSet="UTF-8" />
+                    <meta name="description" content="Flashback Photography" />
+                    <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                    <meta name="author" content="Ricardo Canastro" />
+                    <meta name="keywords" content="flash,flashback,photography,photo" />
+                </Helmet>
                 <div id="outer-container" className={classes.wrapper}>
                     <Header />
 
