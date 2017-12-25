@@ -81,10 +81,7 @@ const Show = (props: Props) => {
             </div>
             <Hammer onSwipe={props.onSwipe}>
                 <div className={classes.imageContainer}>
-                    <Img
-                        className={classes.image}
-                        sizes={photo.sizes}
-                    />
+                    <Img sizes={photo.sizes} />
                 </div>
             </Hammer>
             <div className={classes.mobileDetailsWrapper}>

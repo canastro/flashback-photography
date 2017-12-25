@@ -8,23 +8,25 @@ export default {
     },
     caretsWrapper: {
         display: 'flex',
-        alignItems: 'center',
-        justifyItems: 'center',
-        maxWidth: rhythm(40.25), // Gets it right around Instagram's maxWidth.
-        margin: 'auto',
-        width: '100%'
+        maxWidth: rhythm(40.25),
+        width: '100%',
+        marginTop: 20,
+        marginLeft: 'auto',
+        marginRight: 'auto'
     },
     caretLeft: {
         cursor: 'pointer',
         fontSize: '50px',
         color: 'rgba(255,255,255,0.7)',
-        userSelect: 'none'
+        userSelect: 'none',
+        marginTop: 100
     },
     caretRight: {
         cursor: 'pointer',
         fontSize: '50px',
         color: 'rgba(255,255,255,0.7)',
-        userSelect: 'none'
+        userSelect: 'none',
+        marginTop: 100
     },
     close: {
         cursor: 'pointer',

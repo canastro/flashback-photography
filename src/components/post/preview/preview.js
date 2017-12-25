@@ -2,6 +2,7 @@
 import React from 'react';
 import Link from 'gatsby-link';
 import injectSheet from 'react-jss';
+import Img from 'gatsby-image';
 import EyeIcon from 'react-icons/lib/fa/eye';
 
 import styles from './styles';
@@ -52,13 +53,9 @@ class Post extends React.Component {
                 }}
             >
                 <div className={classes.wrapper}>
-                    <img
-                        alt="Post Preview"
-                        src={preview.responsiveResolution.src}
-                        srcSet={preview.responsiveResolution.srcSet}
-                        className={classes.image}
-                    />
+                    <Img alt="Post Preview" className={classes.image} sizes={preview.sizes} />
                 </div>
+
                 {/* overlay */}
                 {this.state.hovering && (
                     <div className={classes.overlay}>
@@ -76,11 +73,8 @@ export const postFragment = graphql`
     fragment Post_details on ContentfulPost {
         id
         preview: photo {
-            responsiveResolution(width: 200) {
-                width
-                height
-                src
-                srcSet
+            sizes(maxWidth: 200) {
+                ...GatsbyContentfulSizes
             }
         }
     }
