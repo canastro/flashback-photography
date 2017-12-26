@@ -1,15 +1,16 @@
 // @flow
 import React from 'react';
 import {connect} from 'react-redux';
+import {Helmet} from 'react-helmet';
 
 import ShowPost from '../components/post/show/show';
 import {navigate} from '../actions/posts';
 
 type Props = {
-    data: Object,
-    posts: Array<Object>,
-    navigate: Function,
-    location: Object
+  data: Object,
+  posts: Array<Object>,
+  navigate: Function,
+  location: Object
 };
 
 /**
@@ -17,35 +18,45 @@ type Props = {
  * @method PostTemplate
  */
 class PostPage extends React.Component {
-    props: Props
+  props: Props;
 
-    /**
-     * @method handleSwipe
-     * @param {Object} event - swipe event
-     */
-    handleSwipe = (event) => {
-        const direction = event.direction > 2 ? 'prev' : 'next';
+  /**
+   * @method handleSwipe
+   * @param {Object} event - swipe event
+   */
+  handleSwipe = (event) => {
+      const direction = event.direction > 2 ? 'prev' : 'next';
 
-        const {posts} = this.props;
-        const id = this.props.location.pathname.split('/post/')[1];
-        const currentPostId = id.endsWith('/') ? id.slice(0, -1) : id;
+      const {posts} = this.props;
+      const id = this.props.location.pathname.split('/post/')[1];
+      const currentPostId = id.endsWith('/') ? id.slice(0, -1) : id;
 
-        this.props.navigate(
-            posts,
-            currentPostId,
-            direction
-        );
-    };
+      this.props.navigate(posts, currentPostId, direction);
+  };
 
-    /**
-     * @method render
-     * @returns {Node} react node
-     */
-    render() {
-        const {allContentfulPost} = this.props.data;
+  /**
+   * @method render
+   * @returns {Node} react node
+   */
+  render() {
+      const {allContentfulPost} = this.props.data;
+      const post = allContentfulPost.edges[0].node;
+      const {description, photo, photographer} = post;
 
-        return <ShowPost post={allContentfulPost} onSwipe={this.handleSwipe} />;
-    }
+      // const location = typeof window !== 'undefined' && window && window.location;
+      // <meta property="og:url" content={location.href} />
+
+      return [
+          <Helmet>
+              <meta property="og:url" content="https://flashback.netlify.com" />
+              <meta property="og:type" content="article" />
+              <meta property="og:title" content={`Photo by ${photographer.name}`} />
+              <meta property="og:description" content={description} />
+              <meta property="og:image" content={`https:${photo.sizes.src}`} />
+          </Helmet>,
+          <ShowPost post={allContentfulPost} onSwipe={this.handleSwipe} />
+      ];
+  }
 }
 
 /**
@@ -58,13 +69,13 @@ const mapStateToProps = (state: Object) => ({posts: state.photos.posts});
 export default connect(mapStateToProps, {navigate})(PostPage);
 
 export const pageQuery = graphql`
-    query PostPage($id: String!) {
-        allContentfulPost(filter: {id: {eq: $id}}) {
-            edges {
-                node {
-                    ...PostDetail_details
-                }
-            }
+  query PostPage($id: String!) {
+    allContentfulPost(filter: { id: { eq: $id } }) {
+      edges {
+        node {
+          ...PostDetail_details
         }
+      }
     }
+  }
 `;

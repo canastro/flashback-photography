@@ -1,7 +1,6 @@
 // @flow
 import React from 'react';
 import injectSheet from 'react-jss';
-import {Helmet} from 'react-helmet';
 import Hammer from 'react-hammerjs';
 import Link from 'gatsby-link';
 import Img from 'gatsby-image';
@@ -62,18 +61,8 @@ const Show = (props: Props) => {
         </div>
     );
 
-    // const location = typeof window !== 'undefined' && window && window.location;
-    // <meta property="og:url" content={location.href} />
-
     return (
         <div className={classes.root} onClick={e => e.stopPropagation()}>
-            <Helmet>
-                <meta property="og:url" content="https://flashback.netlify.com" />
-                <meta property="og:type" content="article" />
-                <meta property="og:title" content={`Photo by ${photographer.name}`} />
-                <meta property="og:description" content={description} />
-                <meta property="og:image" content={`https:${photo.sizes.src}`} />
-            </Helmet>
             <div className={classes.tabletDetailsContainer}>
                 <div className={classes.tabletDetailsWrapper}>
                     <PostDetails />
