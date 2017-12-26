@@ -52,7 +52,7 @@ class PostPage extends React.Component {
           <Helmet key="helmet">
               <meta
                   property="og:url"
-                  content={`https://flashback.netlify.com/post/${id}`}
+                  content={`flashback.netlify.com/post/${id}`}
               />
               <meta property="og:type" content="article" />
               <meta property="og:title" content={`Photo by ${photographer.name}`} />
