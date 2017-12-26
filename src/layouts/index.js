@@ -5,7 +5,7 @@ import injectSheet from 'react-jss';
 import {Helmet} from 'react-helmet';
 
 // Load the css for the Space Mono font.
-import 'typeface-space-mono';
+// import 'typeface-space-mono';
 
 import styles from './styles';
 import Header from '../components/header/header';

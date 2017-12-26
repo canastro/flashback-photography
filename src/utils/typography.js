@@ -4,7 +4,7 @@ const options = {
     googleFonts: [
         {
             name: 'Space Mono',
-            styles: ['400', '400i', '700', '700i']
+            styles: ['400', '700']
         }
     ],
     baseFontSize: '18px',

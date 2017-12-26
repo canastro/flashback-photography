@@ -1,9 +1,5 @@
-import {createStore, applyMiddleware} from 'redux';
-import {createLogger} from 'redux-logger';
-import thunk from 'redux-thunk';
-
-import reducer from '../reducers';
-
-const middleware = applyMiddleware(thunk, createLogger());
-
-export default () => createStore(reducer, middleware);
+if (process.env.NODE_ENV === 'production') {
+    module.exports = require('./create-store.prod');
+} else {
+    module.exports = require('./create-store.dev');
+}
