@@ -23,12 +23,9 @@ class Pages extends React.Component {
 
   /**
    * Dispatches the action to update the current posts
-   * @param {Object} props - react props
    */
-  constructor(props) {
-      super(props);
-
-      const posts = props.data.allContentfulPost.edges.map(e => e.node);
+  componentDidMount() {
+      const posts = this.props.data.allContentfulPost.edges.map(e => e.node);
 
       this.props.setPosts(posts);
   }

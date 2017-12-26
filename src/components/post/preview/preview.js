@@ -55,9 +55,8 @@ export class Preview extends React.Component {
                     <Img alt="Post Preview" className={classes.image} sizes={preview.sizes} />
                 </div>
 
-                {/* overlay */}
                 {this.state.hovering && (
-                    <div className={classes.overlay}>
+                    <div key="preview-hovering" className={classes.overlay}>
                         <EyeIcon className={classes.icon} />
                     </div>
                 )}

@@ -102,17 +102,12 @@ class Index extends React.Component {
             <div className={classes.root}>
                 {items.map((item, i) => (
                     <div key={`chunk-${i}`} className={classes.postsChunk}>
-                        {item.map(node => (
-                            <Post
-                                key={node.id}
-                                post={node}
-                            />
-                        ))}
+                        {item.map(node => <Post key={node.id} post={node} />)}
                     </div>
                 ))}
 
                 {!this.state.showingMore && (
-                    <a className={classes.showMore} onClick={this.handleMoreClick}>
+                    <a key="loadMore" className={classes.showMore} onClick={this.handleMoreClick}>
                         Load More
                     </a>
                 )}
