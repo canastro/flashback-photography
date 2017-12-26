@@ -41,20 +41,29 @@ class PostPage extends React.Component {
   render() {
       const {allContentfulPost} = this.props.data;
       const post = allContentfulPost.edges[0].node;
-      const {description, photo, photographer} = post;
+      const {
+          id, description, photo, photographer
+      } = post;
 
       // const location = typeof window !== 'undefined' && window && window.location;
       // <meta property="og:url" content={location.href} />
 
       return [
           <Helmet key="helmet">
-              <meta property="og:url" content="https://flashback.netlify.com" />
+              <meta
+                  property="og:url"
+                  content={`https://flashback.netlify.com/post/${id}`}
+              />
               <meta property="og:type" content="article" />
               <meta property="og:title" content={`Photo by ${photographer.name}`} />
               <meta property="og:description" content={description} />
               <meta property="og:image" content={`https:${photo.sizes.src}`} />
           </Helmet>,
-          <ShowPost key="showPost" post={allContentfulPost} onSwipe={this.handleSwipe} />
+          <ShowPost
+              key="showPost"
+              post={allContentfulPost}
+              onSwipe={this.handleSwipe}
+          />
       ];
   }
 }
