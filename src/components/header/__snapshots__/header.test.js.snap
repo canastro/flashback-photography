@@ -1,0 +1,158 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render correctly 1`] = `
+<div
+  className="root"
+>
+  <div
+    className="wrapper"
+  >
+    <GatsbyLink
+      className="titleLink"
+      to="/"
+    >
+      <h1
+        className="title"
+      >
+        <FaCameraRetro
+          className="icon"
+        />
+        <span
+          className="titleSpan"
+        >
+          Flashback
+        </span>
+      </h1>
+    </GatsbyLink>
+    <div
+      className="desktopMenu"
+    >
+      <GatsbyLink
+        className="link"
+        key="contact"
+        onClick={[Function]}
+        to="/contact/"
+      >
+        Contact
+      </GatsbyLink>
+      <GatsbyLink
+        className="link"
+        key="about"
+        onClick={[Function]}
+        to="/about/"
+      >
+        About
+      </GatsbyLink>
+      <GatsbyLink
+        className="link"
+        key="album"
+        onClick={[Function]}
+        to="/albums/"
+      >
+        Albums
+      </GatsbyLink>
+    </div>
+    <div
+      className="mobileMenu"
+    >
+      <Menu
+        bodyClassName=""
+        burgerBarClassName=""
+        burgerButtonClassName=""
+        className="mobileMenu"
+        crossButtonClassName=""
+        crossClassName=""
+        id=""
+        isOpen={false}
+        itemListClassName=""
+        menuClassName=""
+        morphShapeClassName=""
+        noOverlay={false}
+        onStateChange={[Function]}
+        outerContainerId="outer-container"
+        overlayClassName=""
+        pageWrapId="page-wrap"
+        right={true}
+        styles={
+          Object {
+            "bmBurgerBars": Object {
+              "background": "#373a47",
+            },
+            "bmBurgerButton": Object {
+              "height": "30px",
+              "left": "initial",
+              "position": "absolute",
+              "right": 36,
+              "top": 20,
+              "width": "36px",
+            },
+            "bmCross": Object {
+              "background": "#bdc3c7",
+            },
+            "bmCrossButton": Object {
+              "height": "24px",
+              "width": "24px",
+            },
+            "bmItemList": Object {
+              "color": "#b8b7ad",
+              "display": "flex",
+              "flexDirection": "column",
+              "padding": "0.8em",
+            },
+            "bmMenu": Object {
+              "background": "#373a47",
+              "fontSize": "1.15em",
+              "padding": "2.5em 1.5em 0",
+            },
+            "bmMenuWrap": Object {
+              "top": 0,
+            },
+            "bmMorphShape": Object {
+              "fill": "#373a47",
+            },
+            "bmOverlay": Object {
+              "background": "rgba(0, 0, 0, 0.3)",
+              "left": 0,
+              "top": 0,
+            },
+          }
+        }
+        width={300}
+      >
+        <GatsbyLink
+          className="link"
+          key="home"
+          onClick={[Function]}
+          to="/"
+        >
+          Home
+        </GatsbyLink>
+        <GatsbyLink
+          className="link"
+          key="contact"
+          onClick={[Function]}
+          to="/contact/"
+        >
+          Contact
+        </GatsbyLink>
+        <GatsbyLink
+          className="link"
+          key="about"
+          onClick={[Function]}
+          to="/about/"
+        >
+          About
+        </GatsbyLink>
+        <GatsbyLink
+          className="link"
+          key="album"
+          onClick={[Function]}
+          to="/albums/"
+        >
+          Albums
+        </GatsbyLink>
+      </Menu>
+    </div>
+  </div>
+</div>
+`;

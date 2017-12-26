@@ -1,0 +1,60 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`when no settings are provided should render correctly 1`] = `""`;
+
+exports[`when settings are provided should render correctly 1`] = `
+<ul
+  className="listContainer"
+>
+  <li
+    className="settingItem"
+  >
+    <img
+      alt="Machine"
+      className="icon"
+      src={null}
+    />
+    TEST-MACHINE
+  </li>
+  <li
+    className="settingItem"
+  >
+    <img
+      alt="Focal Length"
+      className="icon"
+      src={null}
+    />
+    TEST-FOCAL-LENGTH
+  </li>
+  <li
+    className="settingItem"
+  >
+    <img
+      alt="Aperture"
+      className="icon"
+      src={null}
+    />
+    TEST-APERTURE
+  </li>
+  <li
+    className="settingItem"
+  >
+    <img
+      alt="Exposure Time"
+      className="icon"
+      src={null}
+    />
+    TEST-EXPOSURE-TIME
+  </li>
+  <li
+    className="settingItem"
+  >
+    <img
+      alt="ISO"
+      className="icon"
+      src={null}
+    />
+    TEST-ISO
+  </li>
+</ul>
+`;

@@ -21,7 +21,7 @@ type Props = {
  * @param  {Object} props - react props
  * @returns {Node} react node
  */
-const Settings = (props: Props) => {
+export const Settings = (props: Props) => {
     if (!props.settings) return null;
 
     return (

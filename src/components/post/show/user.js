@@ -53,7 +53,7 @@ type Props = {
  * @param  {Object} props - react props
  * @returns {Node} react node
  */
-const User = (props: Props) => {
+export const User = (props: Props) => {
     const location = typeof window !== 'undefined' && window && window.location;
     const uri = encodeURIComponent(location.href);
 

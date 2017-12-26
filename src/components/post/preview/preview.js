@@ -14,11 +14,10 @@ type Props = {
 
 /**
  * Create a post preview
- * @method Post
  * @param  {Object} props - react props
  * @returns {Node} Post preview
  */
-class Post extends React.Component {
+export class Preview extends React.Component {
     props: Props;
 
     /**
@@ -67,7 +66,7 @@ class Post extends React.Component {
     }
 }
 
-export default injectSheet(styles)(Post);
+export default injectSheet(styles)(Preview);
 
 export const postFragment = graphql`
     fragment Post_details on ContentfulPost {

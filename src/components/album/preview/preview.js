@@ -18,7 +18,7 @@ type Props = {
  * @param  {Object} props - react props
  * @returns {Node} Preview preview
  */
-class Preview extends React.Component {
+export class Preview extends React.Component {
     props: Props;
 
     /**

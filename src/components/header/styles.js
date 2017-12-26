@@ -1,4 +1,5 @@
 import {rhythm, scale} from '../../utils/typography';
+import presets from '../../utils/presets';
 
 export const burgerStyles = {
     bmBurgerButton: {
@@ -93,6 +94,18 @@ export default {
         marginLeft: 20,
         '&:hover': {
             color: '#000'
+        }
+    },
+    mobileMenu: {
+        display: 'block',
+        [presets.Tablet]: {
+            display: 'none'
+        }
+    },
+    desktopMenu: {
+        display: 'none',
+        [presets.Tablet]: {
+            display: 'block'
         }
     }
 };

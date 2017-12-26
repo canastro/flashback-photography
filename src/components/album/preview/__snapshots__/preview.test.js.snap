@@ -1,0 +1,83 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render correctly 1`] = `
+<GatsbyLink
+  className="root"
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
+  to="/album/TEST-NAME/"
+>
+  <div
+    className="wrapper"
+  >
+    <img
+      alt="Preview Preview"
+      className="image"
+      src="TEST-SRC"
+      srcSet="TEST-SRC-SET"
+    />
+  </div>
+  <div
+    className="title"
+  >
+    TEST-NAME
+  </div>
+</GatsbyLink>
+`;
+
+exports[`when mouse enters link should render correctly 1`] = `
+<GatsbyLink
+  className="root"
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
+  to="/album/TEST-NAME/"
+>
+  <div
+    className="wrapper"
+  >
+    <img
+      alt="Preview Preview"
+      className="image"
+      src="TEST-SRC"
+      srcSet="TEST-SRC-SET"
+    />
+  </div>
+  <div
+    className="overlay"
+  >
+    <FaEye
+      className="icon"
+    />
+  </div>
+  <div
+    className="title"
+  >
+    TEST-NAME
+  </div>
+</GatsbyLink>
+`;
+
+exports[`when mouse leaves link should render correctly 1`] = `
+<GatsbyLink
+  className="root"
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
+  to="/album/TEST-NAME/"
+>
+  <div
+    className="wrapper"
+  >
+    <img
+      alt="Preview Preview"
+      className="image"
+      src="TEST-SRC"
+      srcSet="TEST-SRC-SET"
+    />
+  </div>
+  <div
+    className="title"
+  >
+    TEST-NAME
+  </div>
+</GatsbyLink>
+`;

@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render correctly 1`] = `
+<div
+  className="root"
+>
+  <div
+    className="indicator"
+    role="progressbar"
+  >
+    <svg
+      className="svgIndeterminate"
+      viewBox="0 0 50 50"
+    >
+      <circle
+        className="circle"
+        cx={25}
+        cy={25}
+        fill="none"
+        r={20}
+        strokeWidth={1}
+      />
+    </svg>
+  </div>
+</div>
+`;

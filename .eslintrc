@@ -22,7 +22,10 @@
         "graphql": false,
         "__PATH_PREFIX__": true,
         "__PREFIX_PATHS__": true,
-        "emailjs": true
+        "emailjs": true,
+        "it": true,
+        "expect": true,
+        "describe": true
     },
     "parserOptions": {
         "sourceType": "module",

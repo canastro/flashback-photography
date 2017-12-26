@@ -1,0 +1,80 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render correctly 1`] = `
+<GatsbyLink
+  className="root"
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
+  to="/post/999/"
+>
+  <div
+    className="wrapper"
+  >
+    <Image
+      alt="Post Preview"
+      className="image"
+      fadeIn={true}
+      sizes={
+        Object {
+          "test": "TEST-SIZES",
+        }
+      }
+    />
+  </div>
+</GatsbyLink>
+`;
+
+exports[`when mouse enters link should render correctly 1`] = `
+<GatsbyLink
+  className="root"
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
+  to="/post/999/"
+>
+  <div
+    className="wrapper"
+  >
+    <Image
+      alt="Post Preview"
+      className="image"
+      fadeIn={true}
+      sizes={
+        Object {
+          "test": "TEST-SIZES",
+        }
+      }
+    />
+  </div>
+  <div
+    className="overlay"
+  >
+    <FaEye
+      className="icon"
+    />
+  </div>
+</GatsbyLink>
+`;
+
+exports[`when mouse leaves link should render correctly 1`] = `
+<GatsbyLink
+  className="root"
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
+  to="/post/999/"
+>
+  <div
+    className="wrapper"
+  >
+    <Image
+      alt="Post Preview"
+      className="image"
+      fadeIn={true}
+      sizes={
+        Object {
+          "test": "TEST-SIZES",
+        }
+      }
+    />
+  </div>
+</GatsbyLink>
+`;

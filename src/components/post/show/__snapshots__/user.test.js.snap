@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`when no settings are provided should render correctly 1`] = `
+<div
+  className="root"
+>
+  <div>
+    <img
+      alt="TEST-USERNAME"
+      src="AVATAR-SRC"
+    />
+    <div>
+      <h5>
+        TEST-USERNAME
+      </h5>
+      <small
+        className="date"
+      >
+        12 Jul 2017
+      </small>
+    </div>
+  </div>
+  <a
+    href="https://www.facebook.com/sharer/sharer.php?u=about%3Ablank;src=sdkpreparse"
+    target="_blank"
+  >
+    <FaShareAlt />
+    <small>
+      Share
+    </small>
+  </a>
+</div>
+`;

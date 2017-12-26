@@ -14,7 +14,7 @@ type Props = {
 /**
  * Header component
  */
-class Header extends React.Component {
+export class Header extends React.Component {
   props: Props;
 
   /**
@@ -24,14 +24,9 @@ class Header extends React.Component {
   constructor(props) {
       super(props);
 
-      this.state = {isOpen: false};
-  }
-
-  /**
-   * Lifecycle method
-   */
-  componentDidMount() {
-      this.isMobile = window && window.innerWidth > 750;
+      this.state = {
+          isOpen: false
+      };
   }
 
   /**
@@ -52,18 +47,13 @@ class Header extends React.Component {
   };
 
   /**
-   * Builds the menu
-   * @method buildMenu
-   * @returns {Node} react node
+   * Builds Links
+   * @returns {Array<Node>} array
    */
-  buildMenu() {
-      if (typeof this.isMobile === 'undefined') {
-          return null;
-      }
-
+  getLinks() {
       const {classes} = this.props;
 
-      const baseMenus = [
+      return [
           <Link
               key="contact"
               onClick={this.handleLinkClick}
@@ -72,6 +62,7 @@ class Header extends React.Component {
           >
         Contact
           </Link>,
+
           <Link
               key="about"
               onClick={this.handleLinkClick}
@@ -89,28 +80,6 @@ class Header extends React.Component {
         Albums
           </Link>
       ];
-
-      if (this.isMobile) {
-          return baseMenus;
-      }
-
-      return (
-          <Menu
-              className={classes.menu}
-              right
-              pageWrapId="page-wrap"
-              outerContainerId="outer-container"
-              styles={burgerStyles}
-              isOpen={this.state.isOpen}
-              onStateChange={this.handleMenuChange}
-          >
-              <Link to="/" onClick={this.handleLinkClick} className={classes.link}>
-          Home
-              </Link>
-
-              {baseMenus}
-          </Menu>
-      );
   }
 
   /**
@@ -120,6 +89,7 @@ class Header extends React.Component {
    */
   render() {
       const {classes} = this.props;
+      const links = this.getLinks();
       return (
           <div className={classes.root}>
               <div className={classes.wrapper}>
@@ -130,7 +100,31 @@ class Header extends React.Component {
                       </h1>
                   </Link>
 
-                  <div>{this.buildMenu()}</div>
+                  <div className={classes.desktopMenu}>{links}</div>
+
+                  <div className={classes.mobileMenu}>
+                      <Menu
+                          className={classes.mobileMenu}
+                          right
+                          pageWrapId="page-wrap"
+                          outerContainerId="outer-container"
+                          styles={burgerStyles}
+                          isOpen={this.state.isOpen}
+                          onStateChange={this.handleMenuChange}
+                      >
+                          {[
+                              <Link
+                                  key="home"
+                                  to="/"
+                                  onClick={this.handleLinkClick}
+                                  className={classes.link}
+                              >
+                  Home
+                              </Link>,
+                              ...links
+                          ]}
+                      </Menu>
+                  </div>
               </div>
           </div>
       );

@@ -41,7 +41,7 @@ exports.onRenderBody = ({setPostBodyComponents}) =>
             key="emailjs-dist"
             type="text/javascript"
             src="https://cdn.emailjs.com/dist/email.min.js"
-            onload="initEmailjs()"
+            onLoad="initEmailjs()"
         />,
         <script
             async
