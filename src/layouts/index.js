@@ -28,11 +28,7 @@ const listsOfPosts = ['/tag', '/album'];
  * @returns {Boolean} boolean
  */
 const shouldRenderInModal = (windowWidth, pathname) => {
-    if (windowWidth < 750) {
-        return false;
-    }
-
-    return pathname.includes('/post');
+    return windowWidth > 750 && pathname.includes('/post');
 };
 
 /**

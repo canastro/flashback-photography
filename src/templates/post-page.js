@@ -47,14 +47,14 @@ class PostPage extends React.Component {
       // <meta property="og:url" content={location.href} />
 
       return [
-          <Helmet>
+          <Helmet key="helmet">
               <meta property="og:url" content="https://flashback.netlify.com" />
               <meta property="og:type" content="article" />
               <meta property="og:title" content={`Photo by ${photographer.name}`} />
               <meta property="og:description" content={description} />
               <meta property="og:image" content={`https:${photo.sizes.src}`} />
           </Helmet>,
-          <ShowPost post={allContentfulPost} onSwipe={this.handleSwipe} />
+          <ShowPost key="showPost" post={allContentfulPost} onSwipe={this.handleSwipe} />
       ];
   }
 }
