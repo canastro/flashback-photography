@@ -31,7 +31,7 @@
     "gatsby-transformer-remark": "^1.7.21",
     "gatsby-transformer-sharp": "^1.6.14",
     "jest": "^22.0.4",
-    "jss": "^9.3.3",
+    "jss": "9.3.3",
     "jss-preset-default": "^4.0.1",
     "lodash": "^4.17.4",
     "mousetrap": "^1.6.1",
