@@ -12,10 +12,10 @@ import Header from '../components/header/header';
 import Modal from '../components/modal/modal';
 
 type Props = {
-    classes: Object,
-    children: Function,
-    location: Object,
-    posts: Array<Object>
+  classes: Object,
+  children: Function,
+  location: Object,
+  posts: Array<Object>
 };
 
 const listsOfPosts = ['/tag', '/album'];
@@ -27,130 +27,130 @@ const listsOfPosts = ['/tag', '/album'];
  * @param   {String} pathname - path name
  * @returns {Boolean} boolean
  */
-const shouldRenderInModal = (windowWidth, pathname) => {
-    return windowWidth > 750 && pathname.includes('/post');
-};
+const shouldRenderInModal = (windowWidth, pathname) =>
+    windowWidth > 750 && pathname.includes('/post');
 
 /**
  * Layout component
  * @extends React
  */
 class DefaultLayout extends React.Component {
-    props: Props;
+  props: Props;
 
-    /**
-     * Constructor
-     * @method  constructor
-     * @param   {Object} props - react props;
-     */
-    constructor(props) {
-        super(props);
+  /**
+   * Constructor
+   * @method  constructor
+   * @param   {Object} props - react props;
+   */
+  constructor(props) {
+      super(props);
 
-        this.state = {previousPathname: '/'};
-    }
+      this.state = {previousPathname: '/'};
+  }
 
-    /**
-     * React lifecycle method
-     * @method  componentDidMount
-     */
-    componentDidMount() {
-        // Create references to html/body elements
-        this.htmlElement = document.querySelector('html');
-        this.bodyElement = document.querySelector('body');
+  /**
+   * React lifecycle method
+   * @method  componentDidMount
+   */
+  componentDidMount() {
+      // Create references to html/body elements
+      this.htmlElement = document.querySelector('html');
+      this.bodyElement = document.querySelector('body');
 
-        // Cache the window width.
-        this.windowWidth = window.innerWidth;
-    }
+      // Cache the window width.
+      this.windowWidth = window.innerWidth;
+  }
 
-    /**
-     * React lifecycle method
-     * @method  componentWillReceiveProps
-     * @param   {Object} nextProps - react next props
-     */
-    componentWillReceiveProps(nextProps) {
-        const {pathname} = this.props.location;
-        if (listsOfPosts.some(path => pathname.includes(path)) || pathname === '/') {
-            this.setState({previousPathname: this.props.location.pathname});
-        }
+  /**
+   * React lifecycle method
+   * @method  componentWillReceiveProps
+   * @param   {Object} nextProps - react next props
+   */
+  componentWillReceiveProps(nextProps) {
+      const {pathname} = this.props.location;
+      if (listsOfPosts.some(path => pathname.includes(path)) || pathname === '/') {
+          this.setState({previousPathname: this.props.location.pathname});
+      }
 
-        // if we're changing to a non-homepage page, put things in
-        // a modal (unless we're on mobile).
-        if (shouldRenderInModal(this.windowWidth, nextProps.location.pathname)) {
-            // Freeze the background from scrolling.
-            this.htmlElement.style.overflow = 'hidden';
-            this.bodyElement.style.overflow = 'hidden';
+      // if we're changing to a non-homepage page, put things in
+      // a modal (unless we're on mobile).
+      if (shouldRenderInModal(this.windowWidth, nextProps.location.pathname)) {
+      // Freeze the background from scrolling.
+          this.htmlElement.style.overflow = 'hidden';
+          this.bodyElement.style.overflow = 'hidden';
 
-            // Always set overflow-y to scroll so the scrollbar stays visible avoiding
-            // weird jumping.
-            this.htmlElement.style.overflowY = 'scroll';
-            return;
-        }
+          // Always set overflow-y to scroll so the scrollbar stays visible avoiding
+          // weird jumping.
+          this.htmlElement.style.overflowY = 'scroll';
+          return;
+      }
 
-        // Otherwise we're navigating back home so delete old home so the
-        // modal can be destroyed.
-        delete this.modalBackgroundChildren;
-        this.htmlElement.style.overflow = 'visible';
-        this.bodyElement.style.overflow = 'visible';
+      // Otherwise we're navigating back home so delete old home so the
+      // modal can be destroyed.
+      delete this.modalBackgroundChildren;
+      this.htmlElement.style.overflow = 'visible';
+      this.bodyElement.style.overflow = 'visible';
 
-        // Always set overflow-y to scroll so the scrollbar stays visible avoiding
-        // weird jumping.
-        this.htmlElement.style.overflowY = 'scroll';
-    }
+      // Always set overflow-y to scroll so the scrollbar stays visible avoiding
+      // weird jumping.
+      this.htmlElement.style.overflowY = 'scroll';
+  }
 
-    /**
-     * Render method
-     * @method  render
-     * @returns {Node} react node
-     */
-    render() {
-        const {location, posts, classes} = this.props;
-        const isModal = shouldRenderInModal(this.windowWidth, this.props.location.pathname);
-        const pathname = this.state.previousPathname;
+  /**
+   * Render method
+   * @method  render
+   * @returns {Node} react node
+   */
+  render() {
+      const {location, posts, classes} = this.props;
+      const isModal = shouldRenderInModal(
+          this.windowWidth,
+          this.props.location.pathname
+      );
+      const pathname = this.state.previousPathname;
 
-        return (
-            <div className={classes.root}>
-                <Helmet>
-                    <title>Flashback</title>
-                    <meta charSet="UTF-8" />
-                    <meta name="description" content="Flashback Photography" />
-                    <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-                    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-                    <meta name="author" content="Ricardo Canastro" />
-                    <meta name="keywords" content="flash,flashback,photography,photo" />
-                    <meta property="fb:app_id" content="1593275980765181" />
-                </Helmet>
-                <div id="outer-container" className={classes.wrapper}>
-                    <Header />
+      return (
+          <div className={classes.root}>
+              <Helmet>
+                  <title>Flashback</title>
+                  <meta charSet="UTF-8" />
+                  <meta name="description" content="Flashback Photography" />
+                  <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+                  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                  <meta name="author" content="Ricardo Canastro" />
+                  <meta name="keywords" content="flash,flashback,photography,photo" />
+                  <meta property="fb:app_id" content="1593275980765181" />
+              </Helmet>
+              <div id="outer-container" className={classes.wrapper}>
+                  <Header />
 
-                    <div id="page-wrap" className={classes.modalWrapper}>
-                        <div>
-                            {isModal
-                                ? this.props.children({...this.props, location: {pathname}})
-                                : this.props.children()}
-                        </div>
+                  <div id="page-wrap" className={classes.modalWrapper}>
+                      {isModal
+                          ? this.props.children({...this.props, location: {pathname}})
+                          : this.props.children()}
 
-                        <div>
-                            {isModal && (
-                                <Modal
-                                    isOpen
-                                    posts={posts}
-                                    location={location}
-                                    exitPathname={pathname}
-                                >
-                                    {this.props.children}
-                                </Modal>
-                            )}
-                        </div>
-                    </div>
-                </div>
+                      {isModal && (
+                          <Modal
+                              isOpen
+                              posts={posts}
+                              location={location}
+                              exitPathname={pathname}
+                          >
+                              {this.props.children}
+                          </Modal>
+                      )}
+                  </div>
+              </div>
 
-                <footer className={classes.footer}>
-                    <small><span role="img" aria-label="">©</span> Copyright 2008 - 2017. All rights reserved.</small>
-                    <small>Powered by Ricardo Canastro</small>
-                </footer>
-            </div>
-        );
-    }
+              <footer className={classes.footer}>
+                  <small>
+                      <span role="img" aria-label="">©</span> Copyright 2008 - 2017. All rights reserved.
+                  </small>
+                  <small>Powered by Ricardo Canastro</small>
+              </footer>
+          </div>
+      );
+  }
 }
 
 /**

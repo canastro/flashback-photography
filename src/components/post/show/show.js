@@ -61,20 +61,24 @@ const Show = (props: Props) => {
         </div>
     );
 
+    // TODO I had a bug where the root classe sometimes was not properly
+    // added to the html, by adding a extra div the issue was gone.. wow
     return (
-        <div className={classes.root} onClick={e => e.stopPropagation()}>
-            <div className={classes.tabletDetailsContainer}>
-                <div className={classes.tabletDetailsWrapper}>
+        <div>
+            <div className={classes.root} onClick={e => e.stopPropagation()}>
+                <div className={classes.tabletDetailsContainer}>
+                    <div className={classes.tabletDetailsWrapper}>
+                        <PostDetails />
+                    </div>
+                </div>
+                <Hammer onSwipe={props.onSwipe}>
+                    <div className={classes.imageContainer}>
+                        <Img sizes={photo.sizes} />
+                    </div>
+                </Hammer>
+                <div className={classes.mobileDetailsWrapper}>
                     <PostDetails />
                 </div>
-            </div>
-            <Hammer onSwipe={props.onSwipe}>
-                <div className={classes.imageContainer}>
-                    <Img sizes={photo.sizes} />
-                </div>
-            </Hammer>
-            <div className={classes.mobileDetailsWrapper}>
-                <PostDetails />
             </div>
         </div>
     );

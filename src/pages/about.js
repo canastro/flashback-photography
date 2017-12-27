@@ -9,7 +9,11 @@ const styles = {
     root: {
         padding: rhythm(3 / 4)
     },
+    textContent: {
+        textAlign: 'justify'
+    },
     photographer: {
+        extend: 'textContent',
         display: 'flex',
         flexDirection: 'column',
         marginTop: 20
@@ -50,7 +54,10 @@ const About = (props: Props) => {
     return (
         <div className={classes.root}>
             <h1>About Us</h1>
-            <div dangerouslySetInnerHTML={{__html: general.childMarkdownRemark.html}} />
+            <div
+                className={classes.textContent}
+                dangerouslySetInnerHTML={{__html: general.childMarkdownRemark.html}}
+            />
 
             {photographers.map(photographer => (
                 <div key={photographer.id} className={classes.photographer}>
