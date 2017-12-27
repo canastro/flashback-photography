@@ -13,6 +13,7 @@ import styles from './styles';
 type Props = {
     classes: Object,
     children: Function,
+    navigate: Function,
     isOpen: boolean,
     location: Object,
     exitPathname: string,
@@ -49,14 +50,13 @@ class MyModal extends React.Component {
     }
 
     /**
-     * Find current post
-     * @method  findCurrentIndex
-     * @returns {Number} post index
+     * Get the current post id based on the current location pathname
+     * @method getCurrentPostId
+     * @returns {String} post id
      */
-    findCurrentIndex() {
+    getCurrentPostId() {
         const id = this.props.location.pathname.split('/post/')[1];
-        const postId = id.endsWith('/') ? id.slice(0, -1) : id;
-        return this.props.posts.findIndex(post => post.id === postId);
+        return id.endsWith('/') ? id.slice(0, -1) : id;
     }
 
     /**
@@ -69,18 +69,7 @@ class MyModal extends React.Component {
             e.stopPropagation();
         }
 
-        const currentIndex = this.findCurrentIndex();
-        if (currentIndex || currentIndex === 0) {
-            const {posts} = this.props;
-            let nextPost;
-            // Wrap around if at end.
-            if (currentIndex + 1 === posts.length) {
-                nextPost = posts[0];
-            } else {
-                nextPost = posts[currentIndex + 1];
-            }
-            navigateTo(`/post/${nextPost.id}/`);
-        }
+        this.props.navigate(this.props.posts, this.getCurrentPostId(), 'next');
     }
 
     /**
@@ -92,18 +81,8 @@ class MyModal extends React.Component {
         if (e) {
             e.stopPropagation();
         }
-        const currentIndex = this.findCurrentIndex();
-        if (currentIndex || currentIndex === 0) {
-            const {posts} = this.props;
-            let previousPost;
-            // Wrap around if at start.
-            if (currentIndex === 0) {
-                previousPost = posts.slice(-1)[0];
-            } else {
-                previousPost = posts[currentIndex - 1];
-            }
-            navigateTo(`/post/${previousPost.id}/`);
-        }
+
+        this.props.navigate(this.props.posts, this.getCurrentPostId(), 'previous');
     }
 
     /**

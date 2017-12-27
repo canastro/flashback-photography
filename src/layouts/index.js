@@ -4,16 +4,15 @@ import {connect} from 'react-redux';
 import injectSheet from 'react-jss';
 import {Helmet} from 'react-helmet';
 
-// Load the css for the Space Mono font.
-// import 'typeface-space-mono';
-
 import styles from './styles';
 import Header from '../components/header/header';
 import Modal from '../components/modal/modal';
+import {navigate} from '../actions/posts';
 
 type Props = {
   classes: Object,
   children: Function,
+  navigate: Function,
   location: Object,
   posts: Array<Object>
 };
@@ -135,6 +134,7 @@ class DefaultLayout extends React.Component {
                               posts={posts}
                               location={location}
                               exitPathname={pathname}
+                              navigate={this.props.navigate}
                           >
                               {this.props.children}
                           </Modal>
@@ -160,4 +160,4 @@ class DefaultLayout extends React.Component {
  */
 const mapStateToProps = (state: Object) => ({posts: state.photos.posts});
 
-export default connect(mapStateToProps, {})(injectSheet(styles)(DefaultLayout));
+export default connect(mapStateToProps, {navigate})(injectSheet(styles)(DefaultLayout));
