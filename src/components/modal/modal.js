@@ -28,12 +28,18 @@ class MyModal extends React.Component {
     props: Props;
 
     /**
+     * Set app element for the Modal
+     * @method componentWillMount
+     */
+    componentWillMount() {
+        Modal.setAppElement('body');
+    }
+
+    /**
      * Bind events
      * @method  componentDidMount
      */
     componentDidMount() {
-        Modal.setAppElement('body');
-
         mousetrap.bind('left', () => this.previous());
         mousetrap.bind('right', () => this.next());
         mousetrap.bind('spacebar', () => this.next());

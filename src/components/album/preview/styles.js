@@ -24,7 +24,6 @@ export default {
         flexDirection: 'column',
         flexShrink: 0,
         position: 'relative',
-        paddingBottom: '100%',
         overflow: 'hidden',
         outline: 0
     },

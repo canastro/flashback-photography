@@ -19,14 +19,14 @@ export default {
         fontSize: '50px',
         color: 'rgba(255,255,255,0.7)',
         userSelect: 'none',
-        marginTop: 100
+        marginTop: 215
     },
     caretRight: {
         cursor: 'pointer',
         fontSize: '50px',
         color: 'rgba(255,255,255,0.7)',
         userSelect: 'none',
-        marginTop: 100
+        marginTop: 215
     },
     close: {
         cursor: 'pointer',

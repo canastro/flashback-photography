@@ -32,11 +32,8 @@ export const pageQuery = graphql`
                     id
                     name
                     cover {
-                        responsiveResolution(width: 200) {
-                            width
-                            height
-                            src
-                            srcSet
+                        sizes(maxWidth: 200) {
+                            ...GatsbyContentfulSizes
                         }
                     }
                 }

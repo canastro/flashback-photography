@@ -1,8 +1,9 @@
 // @flow
 import React from 'react';
-import Link from 'gatsby-link';
 import injectSheet from 'react-jss';
 import EyeIcon from 'react-icons/lib/fa/eye';
+import Link from 'gatsby-link';
+import Img from 'gatsby-image';
 import slug from 'slug';
 
 import styles from './styles';
@@ -53,12 +54,7 @@ export class Preview extends React.Component {
                 }}
             >
                 <div className={classes.wrapper}>
-                    <img
-                        alt="Preview Preview"
-                        src={cover.responsiveResolution.src}
-                        srcSet={cover.responsiveResolution.srcSet}
-                        className={classes.image}
-                    />
+                    <Img alt="Album Preview" className={classes.image} sizes={cover.sizes} />
                 </div>
 
                 {this.state.hovering && (
