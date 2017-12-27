@@ -47,6 +47,7 @@ exports[`when mouse enters link should render correctly 1`] = `
   </div>
   <div
     className="overlay"
+    key="preview-hovering"
   >
     <FaEye
       className="icon"

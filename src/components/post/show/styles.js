@@ -3,6 +3,10 @@ import typography, {rhythm, scale} from '../../../utils/typography';
 
 export default {
     root: {
+        display: 'flex',
+        width: '100%'
+    },
+    wrapper: {
         maxHeight: 500,
         backgroundColor: 'black',
         display: 'flex',
